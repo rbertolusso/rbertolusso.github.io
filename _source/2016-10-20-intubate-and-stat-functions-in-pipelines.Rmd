@@ -127,45 +127,29 @@ following posts.
 
 ### intubate
 
+* The original aim of `intubate` is to offer a *painless* way to add R functions that are *non-pipe-aware* to data science pipelines implemented by 'magrittr' with the operator %>%, without having to rely on *workarounds* of varying complexity.
+
 ```{r}
+## install.packages("intubate")
 library(intubate)
 ```
 
-To overcome this obstacle, `intubate` proposes two approaches:
-
-1. The function `ntbt`, that can be used to call non-pipe-aware functions "on the fly":
-
-```{r}
-LifeCycleSavings %>% 
-  filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>% 
-  ntbt(lm, sr ~ .) %>%               ## Interfacing lm "on the fly"
-  summary()
-```
-
-2. Interfaces to the non-pipe-aware functions. The names of the provided
-interfaces start with `ntbt_` followed by the name of the non-pipe-aware
-function:
+* To this end, `intubate` provides *interfaces*
+(such as `ntbt_lm`) that let you do:
 
 ```{r}
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>% 
-  ntbt_lm(sr ~ .) %>%               ## Using interface
+  select(sr, pop15, pop75) %>%
+  ntbt_lm(sr ~ pop15 + pop75) %>% 
   summary()
 ```
 
-By using `intubate`'s approaches the error vanishes, and tons of "traditional"
-R functions can now function properly in the "modern" paradigm of pipelines.
+without error.
 
-`intubate` currently inplements over 450 interfaces to 88 data science related
-packages (complete list of packages at the end).
+<br />
 
-Just in case, let's clarify that the `intubate` machinery does not perform any
-statistical computation. The *interfaced* functions
-(those that are already well tested) are the ones performing the computations.
-
-* With `intubate`, you can push boundaries and do things like the following:
+* With `intubate`, you can push boundaries and do things like:
 ```{r}
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
@@ -177,6 +161,72 @@ LifeCycleSavings %>%
 (as `plot` returns `NULL`, `intubate` automatically forwards
 its input so `summary` receives the result of `lm`).
 
+<br />
+
+* Currently, intubate provides more than 450 interfaces to 88 data science related packages in CRAN or in R installation (list of packages in Appendix).
+
+<hr />
+
+* Moreover, the user can:
+    - call non-pipe-aware functions "on the fly" without
+    needing to create an interface;
+    - create interfaces "on demand".
+
+### Calling non-pipe-aware functions "on the fly"
+
+* If you do not want to use interfaces, you can use the function
+`ntbt` to call the non-pipe-aware functions directly "on the fly":
+```{r}
+LifeCycleSavings %>% 
+  ntbt(lm, sr ~ pop15 + pop75)
+```
+Note: this approach works with any function, including the ones lacking
+interfaces.
+
+<br />
+
+* For example, `lsfit` does not currently have an interface provided
+  by `intubate`, but you still can call it "on the fly" with `ntbt`:
+  
+```{r}
+LifeCycleSavings %>%
+  ntbt_plot(pop75, sr) %>%
+  ntbt(lsfit, pop75, sr) %>%    # Calling lsfit "on the fly" with ntbt
+  abline()
+```
+  
+### Creating interfaces "on demand"
+
+* If you like to use interfaces, and `intubate` does not provide one,
+you can create your own "on demand". For example, to create an
+interface to `lsfit`, all that is needed is the following line:
+
+```{r}
+ntbt_lsfit <- intubate
+```
+
+The *only* thing you need to remember is that the name of an interface
+*must start* with `ntbt_` followed by the name of the *interfaced* function
+(`lsfit` in this particular case), no matter which function you want to
+interface.
+
+<br />
+
+You can now use the newly created interface as any other provided
+by `intubate`:
+
+```{r}
+LifeCycleSavings %>%
+  ntbt_plot(pop75, sr) %>%
+  ntbt_lsfit(pop75, sr) %>%    # Using just created "on demand" interface
+  abline()
+```
+
+
+Just in case, let's clarify that the `intubate` machinery does not perform any
+statistical computation. The *interfaced* functions
+(those that are already well tested) are the ones performing the computations.
+
 ### Non-formula variants:
 Some functions offer non-formula variants (or both variants). For example,
 including `cor.test` in a pipeline in any of its variants produces an error:
@@ -184,7 +234,7 @@ including `cor.test` in a pipeline in any of its variants produces an error:
 ```{r}
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>%
+  select(sr, pop15, pop75) %>%   ## Non-formula variant
   cor.test(pop15, pop75)
 ```
 
@@ -192,7 +242,7 @@ or:
 ```{r}
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>%
+  select(sr, pop15, pop75) %>%   ## Formula variant
   cor.test(~ pop15 + pop75)
 ```
 
@@ -200,7 +250,7 @@ Both variants work when using any of the approaches provided by `intubate`:
 ```{r}
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>%
+  select(sr, pop15, pop75) %>%   ## Non-formula variant
   ntbt_cor.test(pop15, pop75)
 ```
 
@@ -208,7 +258,7 @@ or:
 ```{r}
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>%
+  select(sr, pop15, pop75) %>%   ## Formula variant
   ntbt(cor.test, ~ pop15 + pop75)
 ```
 
