@@ -21,13 +21,17 @@ Note: This post is the continuation of the post <a href="intubate-and-stat-funct
 
 ### What can you do if you do not want to use `intubate` and you still want to use non-pipe-aware functions in pipelines?
 
+```{r}
+library(magrittr)
+```
+
 #### Example 1:
 `lm` can be added directly to the pipeline,
 without error, by specifying the name of the parameter
 associated with the model (`formula` in this case).
 ```{r}
-tmp %>%
-  lm(formula = stweight ~ stheight)
+LifeCycleSavings %>% 
+  lm(formula = sr ~ .)
 ```
 
 The drawback of this approach is that not all functions
@@ -84,7 +88,7 @@ iris %>%
 
 #### Example 4:
 Using `gls` directly in a data pipeline
-            will raise an error
+will raise an error
 ```{r}
 library(nlme)
 
@@ -103,12 +107,12 @@ Ovary %>%
 
 #### Example 5:
 Using `lme` directly in a data pipeline
-            will raise an error
-```{r, eval=FALSE}
+will raise an error
+```{r}
 library(nlme)
 
 Orthodont %>%
-      lme(distance ~ age)
+  lme(distance ~ age)
 ```
 
 unless `fixed`(!) is specified.
@@ -118,32 +122,32 @@ Orthodont %>%
 ```
 
 
- Having to remember the name of the
- parameter associated to the model in each case
- may be error prone, and gives an
- inconsistent look and feel to an otherwise elegant
- interface.
- 
- Moreover, it is consider good practice 
- in R to not specify the name of the first two parameters (and in
- pipes the first is implicit), and
- name the remaining.
- 
- Not having to specify the name of the
- model argument completely hides the heterogeneity of names
- that can be associated with it. You only write the model
- and completely forget which name has been assigned to it.
+Having to remember the name of the
+parameter associated to the model in each case
+may be error prone, and gives an
+inconsistent look and feel to an otherwise elegant
+interface.
+
+Moreover, it is consider good practice 
+in R to not specify the name of the first two parameters (and in
+pipes the first is implicit), and
+name the remaining.
+
+Not having to specify the name of the
+model argument completely hides the heterogeneity of names
+that can be associated with it. You only write the model
+and completely forget which name has been assigned to it.
 
 ### More complicated workarounds
- There are functions that rely on the order of the parameters
- (such as `aggregate`, `cor.test` and other 28 I found so far) that will still
- raise an error *even if you name the model*.
- 
- In fact, there are cases where it is *not
- true* that if in a function call you name the parameters
- you can write them in any order you want?
- 
- One example is `cor.test`?
+There are functions that rely on the order of the parameters
+(such as `aggregate`, `cor.test` and other 28 I found so far) that will still
+raise an error *even if you name the model*.
+
+In fact, there are cases where it is *not
+true* that if in a function call you name the parameters
+you can write them in any order you want?
+
+One example is `cor.test`:
 
 #### 1) Unnamed parameters in the natural order. Works
 ```{r}
@@ -164,7 +168,7 @@ Let's see what happens if we want to add these cases to the `%>%` pipeline.
 
 #### Example of error 1: `cor.test`
 Using cor.test directly in a data pipeline
-       will raise an error
+will raise an error
 ```{r}
 USJudgeRatings %>%
   cor.test(~ CONT + INTG)
@@ -195,7 +199,7 @@ No
 
 #### Example of error 2: `aggregate`
 Using `aggregate` directly in a data pipeline
-         will raise an error
+will raise an error
 ```{r}
 ToothGrowth %>%
   aggregate(len ~ ., mean)
@@ -211,7 +215,7 @@ or other variants.
 
 #### Example of error 3: `lda`
 Using `lda` directly in a data pipeline
-         will raise an error
+will raise an error
 ```{r, message=FALSE}
 library(MASS)
 
@@ -271,24 +275,24 @@ interpreting the meaning of each of those `.`
 which may cause confusion, particularly at a future
 time when you may have to remember why you had to
 do *this* to *yourself*... (the first is specifying to include in the
-  rhs of the model all the variables in the data but `len`,
-  the second is the name of the data
-  structure passed by the pipe. Yes, it is called `.`!)
+rhs of the model all the variables in the data but `len`,
+the second is the name of the data
+structure passed by the pipe. Yes, it is called `.`!)
 
- Undoubtedly, there may be more elegant workarounds that
- I am unaware of. But the point is that, no matter how elegant,
- they will be, well,
- *still* workarounds. You want to *force* unbehaving functions
- into something that is unnatural to them:
- 
+Undoubtedly, there may be more elegant workarounds that
+I am unaware of. But the point is that, no matter how elegant,
+they will be, well,
+*still* workarounds. You want to *force* unbehaving functions
+into something that is unnatural to them:
+
 * In one case you had to name the parameters,
 * in the other you had to use `%$%` instead of `%>%` and where not allowed
- to use `.` in your model definition,
+to use `.` in your model definition,
 * if you wanted to use `%>%` you had to use
- also `which` and include `.` as the second parameter.
- 
+also `which` and include `.` as the second parameter.
+
 The idea of avoiding such "hacks"
- motivated me to write `intubate`.
+motivated me to write `intubate`.
 
 ### The `intubate` alternative
 
@@ -299,12 +303,28 @@ library(intubate)
 #### For Example 1:
 No need to specify `formula`.
 ```{r}
-tmp %>%
-  ntbt_lm(stweight ~ stheight)
+LifeCycleSavings %>% 
+  ntbt(lm, sr ~ .)
+```
+
+or
+
+```{r}
+LifeCycleSavings %>% 
+  ntbt_lm(sr ~ .)
 ```
 
 #### For Example 2:
 No need to specify `x`.
+```{r}
+iris %>%
+  ntbt(xyplot, Sepal.Length + Sepal.Width ~ Petal.Length + Petal.Width | Species,
+       scales = "free", layout = c(2, 2),
+       auto.key = list(x = .6, y = .7, corner = c(0, 0)))
+```
+
+or
+
 ```{r}
 iris %>%
   ntbt_xyplot(Sepal.Length + Sepal.Width ~ Petal.Length + Petal.Width | Species,
@@ -316,6 +336,15 @@ iris %>%
 No need to specify `object`.
 ```{r}
 iris %>%
+  ntbt(tmd, Sepal.Length + Sepal.Width ~ Petal.Length + Petal.Width | Species,
+       scales = "free", layout = c(2, 2),
+       auto.key = list(x = .6, y = .7, corner = c(0, 0)))
+```
+
+or
+
+```{r}
+iris %>%
   ntbt_tmd(Sepal.Length + Sepal.Width ~ Petal.Length + Petal.Width | Species,
            scales = "free", layout = c(2, 2),
            auto.key = list(x = .6, y = .7, corner = c(0, 0)))
@@ -323,6 +352,14 @@ iris %>%
 
 #### For Example 4:
 No need to specify `model`.
+```{r}
+Ovary %>%
+  ntbt(gls, follicles ~ sin(2*pi*Time) + cos(2*pi*Time),
+       correlation = corAR1(form = ~ 1 | Mare))
+```
+
+or
+
 ```{r}
 Ovary %>%
   ntbt_gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time),
@@ -333,11 +370,25 @@ Ovary %>%
 No need to specify `fixed`.
 ```{r}
 Orthodont %>%
+  ntbt(lme, distance ~ age)
+```
+
+or
+
+```{r}
+Orthodont %>%
   ntbt_lme(distance ~ age)
 ```
 
 #### For Example of error 1:
 It simply works.
+```{r}
+USJudgeRatings %>%
+  ntbt(cor.test, ~ CONT + INTG)
+```
+
+or
+
 ```{r}
 USJudgeRatings %>%
   ntbt_cor.test(~ CONT + INTG)
@@ -347,6 +398,13 @@ USJudgeRatings %>%
 It simply works.
 ```{r}
 ToothGrowth %>%
+  ntbt(aggregate, len ~ ., mean)
+```
+
+or
+
+```{r}
+ToothGrowth %>%
   ntbt_aggregate(len ~ ., mean)
 ```
 
@@ -354,16 +412,23 @@ ToothGrowth %>%
 It simply works.
 ```{r, message=FALSE}
 Iris %>%
+  ntbt(lda, Sp ~ .)
+```
+
+or
+
+```{r, message=FALSE}
+Iris %>%
   ntbt_lda(Sp ~ .)
 ```
 
- I think the approach `intubate` proposes
- looks consistent, elegant, simple and clean,
- less error prone, and easy to follow (of course,
- keep in mind that I have a vested interest in the
- success of `intubate`).
+I think the approach `intubate` proposes
+looks consistent, elegant, simple and clean,
+less error prone, and easy to follow (of course,
+keep in mind that I have a vested interest in the
+success of `intubate`).
 
- After all, the complication should be in
- the analysis you are performing,
- and not in how you are performing it.
+After all, the complication should be in
+the analysis you are performing,
+and not in how you are performing it.
 
