@@ -179,7 +179,7 @@ its input so `summary` receives the result of `lm`).
 
 ### Non-formula variants:
 Some functions offer non-formula variants (or both variants). For example,
-including `cor.test` to a pipelines in any of its variants produces an error:
+including `cor.test` in a pipeline in any of its variants produces an error:
 
 ```{r}
 LifeCycleSavings %>% 
