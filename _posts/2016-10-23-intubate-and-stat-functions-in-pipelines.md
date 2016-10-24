@@ -5,6 +5,7 @@ author: "Roberto Bertolusso"
 categories: [intubate, r-project]
 tags: [intubate, magrittr, data science]
 date: "2016-10-23"
+use_math : true
 ---
 
 
