@@ -250,16 +250,16 @@ Both variants work when using any of the approaches provided by `intubate`:
 ```{r}
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>%   ## Non-formula variant
-  ntbt_cor.test(pop15, pop75)
+  select(sr, pop15, pop75) %>%
+  ntbt_cor.test(pop15, pop75)   ## Non-formula variant
 ```
 
 or:
 ```{r}
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>%   ## Formula variant
-  ntbt(cor.test, ~ pop15 + pop75)
+  select(sr, pop15, pop75) %>%
+  ntbt(cor.test, ~ pop15 + pop75)   ## Formula variant
 ```
 
 ## Appendix
