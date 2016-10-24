@@ -331,8 +331,8 @@ including `cor.test` in a pipeline in any of its variants produces an error:
 ```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>%   ## Non-formula variant
-  cor.test(pop15, pop75)
+  select(sr, pop15, pop75) %>%
+  cor.test(pop15, pop75)   ## Non-formula variant
 ```
 
 ```
@@ -344,8 +344,8 @@ or:
 ```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
-  select(sr, pop15, pop75) %>%   ## Formula variant
-  cor.test(~ pop15 + pop75)
+  select(sr, pop15, pop75) %>%
+  cor.test(~ pop15 + pop75)   ## Formula variant
 ```
 
 ```
