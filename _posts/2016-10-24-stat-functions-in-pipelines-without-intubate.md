@@ -13,7 +13,7 @@ This post explores *some* of the possible workarounds that can be employed
 if you want to include non-pipe-aware functions to `magrittr` pipelines
 without using `intubate` and, at the end, the `intubate` alternative.
 
-Note: This post is the continuation of the post <a href="intubate-and-stat-functions-in-pipelines">intubate <||> R stat functions in data science pipelines</a>.
+Note: This post is the continuation of the post <a href="https://rbertolusso.github.io/posts/intubate-and-stat-functions-in-pipelines">intubate <||> R stat functions in data science pipelines</a>.
 
 ### What can you do if you do not want to use `intubate` and you still want to use non-pipe-aware functions in pipelines?
 
