@@ -118,7 +118,7 @@ parameter.
 There are alternatives that allow
 to include `lm` (and others) in the pipeline without errors and without `intubate`.
 They require workarounds
-of varying levels of complexity and are illustrated later. Some of the possible approaches are illustrated in the post <a href="https://rbertolusso.github.io/posts/stat-functions-in-pipelines-without-intubate">Workarounds to include R stat functions in data science pipelines</a>.
+of varying levels of complexity. Some of the possible approaches are illustrated in the post <a href="https://rbertolusso.github.io/posts/stat-functions-in-pipelines-without-intubate">Workarounds to include R stat functions in data science pipelines</a>.
 
 If you choose `intubate` is because you do not want to bother about workarounds when working with pipelines that include statistical procedures, or other non-pipe-aware functions.
 
