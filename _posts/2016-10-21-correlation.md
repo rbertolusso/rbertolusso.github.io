@@ -13,6 +13,7 @@ This is the first of a series of posts in the subject of linear regression, usin
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
+
 * Acknowledgments: organization is extracted from:
   - *Freedman, Pisani, Purves, Statistics, 4th ed.*, probably
   the best book on statistical thinking (it maybe has a total of 4-5 formulas).
@@ -410,8 +411,10 @@ plot(x, y,
 axp <- seq(58, 80, by = 2)
 axis(1, at = axp, labels = axp)
 axis(2, at = axp, labels = axp)
-abline(v=meanx)
-abline(h=meany)
+
+## Point of averages
+abline(v=meanx, col="green")
+abline(h=meany, col="green")
 ```
 
 <img src="/figure/source/2016-10-21-correlation/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
@@ -462,8 +465,8 @@ axp <- seq(58, 80, by = 2)
 axis(1, at = axp, labels = axp)
 axis(2, at = axp, labels = axp)
 
-abline(v=meanx)
-abline(h=meany)
+abline(v=meanx, col="green")
+abline(h=meany, col="green")
 ```
 
 <img src="/figure/source/2016-10-21-correlation/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" />

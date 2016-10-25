@@ -1,10 +1,10 @@
 # Site settings
-title: intubate <||>
+title: intubate <||>, XBRL, bioPN, sbioPN, and stats with R
 url: "http://rbertolusso.github.io"    # the protocol and hostname of your site, eg. `http://laobubu.github.io`
 baseurl: "" # the prefix of your site uri, eg. `/jekyll-theme-EasyBook` or just one slash `/`
 timezone: America/Chicago
 description: >
-  Information about intubate <||>.
+  Information about intubate <||>, XBRL, bioPN, sbioPN, and stats with R.
 
 # Your information
 email: rbertolusso@gmail.com
