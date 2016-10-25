@@ -879,7 +879,14 @@ and not in how you are performing it.
 
 <hr />
 Please disregard this. I am trying to see if I can make latex math work in Github.
+No luck so far...
+
 \[
 a = \sqrt{\frac{b}{c}}
 \]
+
+$$
+a = \sqrt{\frac{b}{c}}
+$$
+
 <hr />
