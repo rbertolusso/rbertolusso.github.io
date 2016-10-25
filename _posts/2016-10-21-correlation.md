@@ -12,6 +12,8 @@ This is the first of a series of posts in the subject of linear regression, usin
 
 <hr />
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 * Acknowledgments: organization is extracted from:
   - *Freedman, Pisani, Purves, Statistics, 4th ed.*, probably
   the best book on statistical thinking (it maybe has a total of 4-5 formulas).
