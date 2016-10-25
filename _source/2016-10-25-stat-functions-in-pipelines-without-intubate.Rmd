@@ -23,13 +23,19 @@ knitr::opts_chunk$set(echo = TRUE, error=TRUE,
 ```
 
 
-### What can you do if you do not want to use `intubate` and you still want to use non-pipe-aware functions in pipelines?
+### Some workarounds to include non-pipe-aware functions in pipelines.
 
 ```{r}
 library(magrittr)
 ```
 
 #### Example 1:
+Using `lm` directly in a data pipeline will raise an error
+```{r}
+LifeCycleSavings %>% 
+  lm(sr ~ .)
+```
+
 `lm` can be added directly to the pipeline,
 without error, by specifying the name of the parameter
 associated with the model (`formula` in this case).
@@ -283,17 +289,25 @@ rhs of the model all the variables in the data but `len`,
 the second is the name of the data
 structure passed by the pipe. Yes, it is called `.`!)
 
+It is also a solution for the case of `cor.test` before,
+(and it should work in any case):
+
+```{r}
+USJudgeRatings %>%
+  with(cor.test(~ CONT + INTG, .))
+```
+
 Undoubtedly, there may be more elegant workarounds that
 I am unaware of. But the point is that, no matter how elegant,
 they will be, well,
 *still* workarounds. You want to *force* unbehaving functions
 into something that is unnatural to them:
 
-* In one case you had to name the parameters,
+* In some cases you had to name the parameters,
 * in the other you had to use `%$%` instead of `%>%` and where not allowed
 to use `.` in your model definition,
 * if you wanted to use `%>%` you had to use
-also `which` and include `.` as the second parameter.
+also `with` and include `.` as the second parameter.
 
 The idea of avoiding such "hacks"
 motivated me to write `intubate`.

@@ -19,7 +19,7 @@ without using `intubate` and, at the end, the `intubate` alternative. See
 
 
 
-### What can you do if you do not want to use `intubate` and you still want to use non-pipe-aware functions in pipelines?
+### Some workarounds to include non-pipe-aware functions in pipelines.
 
 
 ```r
@@ -27,6 +27,17 @@ library(magrittr)
 ```
 
 #### Example 1:
+Using `lm` directly in a data pipeline will raise an error
+
+```r
+LifeCycleSavings %>% 
+  lm(sr ~ .)
+```
+
+```
+## Error in as.data.frame.default(data): cannot coerce class ""formula"" to a data.frame
+```
+
 `lm` can be added directly to the pipeline,
 without error, by specifying the name of the parameter
 associated with the model (`formula` in this case).
@@ -83,7 +94,7 @@ iris %>%
          auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" style="display: block; margin: auto;" />
 
 #### Example 3: 
 Using `tmd` (a *different* function in the *same* package)
@@ -111,7 +122,7 @@ iris %>%
       auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
 
 
 #### Example 4:
@@ -504,17 +515,40 @@ rhs of the model all the variables in the data but `len`,
 the second is the name of the data
 structure passed by the pipe. Yes, it is called `.`!)
 
+It is also a solution for the case of `cor.test` before,
+(and it should work in any case):
+
+
+```r
+USJudgeRatings %>%
+  with(cor.test(~ CONT + INTG, .))
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  CONT and INTG
+## t = -0.8605, df = 41, p-value = 0.3945
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.4168591  0.1741182
+## sample estimates:
+##        cor 
+## -0.1331909
+```
+
 Undoubtedly, there may be more elegant workarounds that
 I am unaware of. But the point is that, no matter how elegant,
 they will be, well,
 *still* workarounds. You want to *force* unbehaving functions
 into something that is unnatural to them:
 
-* In one case you had to name the parameters,
+* In some cases you had to name the parameters,
 * in the other you had to use `%$%` instead of `%>%` and where not allowed
 to use `.` in your model definition,
 * if you wanted to use `%>%` you had to use
-also `which` and include `.` as the second parameter.
+also `with` and include `.` as the second parameter.
 
 The idea of avoiding such "hacks"
 motivated me to write `intubate`.
@@ -572,7 +606,7 @@ iris %>%
        auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-29-1.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-31-1.png" title="plot of chunk unnamed-chunk-31" alt="plot of chunk unnamed-chunk-31" style="display: block; margin: auto;" />
 
 or
 
@@ -584,7 +618,7 @@ iris %>%
               auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" style="display: block; margin: auto;" />
 
 #### For Example 3:
 No need to specify `object`.
@@ -596,7 +630,7 @@ iris %>%
        auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-31-1.png" title="plot of chunk unnamed-chunk-31" alt="plot of chunk unnamed-chunk-31" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-33-1.png" title="plot of chunk unnamed-chunk-33" alt="plot of chunk unnamed-chunk-33" style="display: block; margin: auto;" />
 
 or
 
@@ -608,7 +642,7 @@ iris %>%
            auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-25-stat-functions-in-pipelines-without-intubate/unnamed-chunk-34-1.png" title="plot of chunk unnamed-chunk-34" alt="plot of chunk unnamed-chunk-34" style="display: block; margin: auto;" />
 
 #### For Example 4:
 No need to specify `model`.
