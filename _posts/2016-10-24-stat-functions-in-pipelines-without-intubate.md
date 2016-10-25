@@ -5,10 +5,7 @@ author: "Roberto Bertolusso"
 categories: [intubate, r-project]
 tags: [intubate, magrittr, data science]
 date: "2016-10-24"
-use_math : true
 ---
-
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 
 
@@ -883,14 +880,18 @@ and not in how you are performing it.
 Please disregard this. I am trying to see if I can make latex math work in Github.
 No luck so far...
 
+A
 \[
 a = \sqrt{\frac{b}{c}}
 \]
 
+B
+
 $$
 a = \sqrt{\frac{b}{c}}
 $$
 
+C
 \\[
 a = \sqrt{\frac{b}{c}}
 \\]
