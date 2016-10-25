@@ -11,7 +11,6 @@ This is the first of a series of posts on the subject of linear regression, usin
 
 <hr />
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 
 * Acknowledgments: organization is extracted from:
