@@ -4,7 +4,7 @@ title: "intubate <||> R stat functions in data science pipelines"
 author: "Roberto Bertolusso"
 categories: [intubate, r-project]
 tags: [intubate, magrittr, data science]
-date: "2016-10-23"
+date: "2016-10-24"
 ---
 
 
@@ -213,7 +213,7 @@ LifeCycleSavings %>%
   summary()
 ```
 
-<img src="/figure/source/2016-10-23-intubate-and-stat-functions-in-pipelines/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-intubate-and-stat-functions-in-pipelines/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
 
 ```
 ## 
@@ -285,7 +285,7 @@ LifeCycleSavings %>%
   abline()
 ```
 
-<img src="/figure/source/2016-10-23-intubate-and-stat-functions-in-pipelines/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-intubate-and-stat-functions-in-pipelines/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" style="display: block; margin: auto;" />
   
 ### Creating interfaces "on demand"
 
@@ -316,7 +316,7 @@ LifeCycleSavings %>%
   abline()
 ```
 
-<img src="/figure/source/2016-10-23-intubate-and-stat-functions-in-pipelines/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-intubate-and-stat-functions-in-pipelines/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" style="display: block; margin: auto;" />
 
 
 Just in case, let's clarify that the `intubate` machinery does not perform any

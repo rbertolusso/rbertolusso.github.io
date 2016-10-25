@@ -4,9 +4,15 @@ title: "Workarounds to include R stat functions in data science pipelines"
 author: "Roberto Bertolusso"
 categories: [intubate, r-project]
 tags: [intubate, magrittr, data science]
-date: "2016-10-24"
+date: "2016-10-25"
 use_math : true
 ---
+
+This post explores *some* of the possible workarounds that can be employed
+if you want to include non-pipe-aware functions to `magrittr` pipelines
+without using `intubate` and, at the end, the `intubate` alternative. See
+<a href="https://rbertolusso.github.io/posts/intubate-and-stat-functions-in-pipelines">intubate <||> R stat functions in data science pipelines</a> for an introduction.
+
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
@@ -16,11 +22,6 @@ knitr::opts_chunk$set(echo = TRUE, error=TRUE,
                       fig.width = 4, fig.height = 4.5)
 ```
 
-This post explores *some* of the possible workarounds that can be employed
-if you want to include non-pipe-aware functions to `magrittr` pipelines
-without using `intubate` and, at the end, the `intubate` alternative.
-
-Note: This post is the continuation of the post <a href="https://rbertolusso.github.io/posts/intubate-and-stat-functions-in-pipelines">intubate <||> R stat functions in data science pipelines</a>.
 
 ### What can you do if you do not want to use `intubate` and you still want to use non-pipe-aware functions in pipelines?
 
