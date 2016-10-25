@@ -5,6 +5,7 @@ author: "Roberto Bertolusso"
 categories: [intubate, r-project]
 tags: [intubate, magrittr, data science]
 date: "2016-10-24"
+use_math : true
 ---
 
 ```{r setup, include=FALSE}
@@ -432,3 +433,9 @@ After all, the complication should be in
 the analysis you are performing,
 and not in how you are performing it.
 
+<hr />
+Please disregard this. I am trying to see if I can make latex math work in Github.
+\[
+a = \sqrt{\frac{b}{c}}
+\]
+<hr />
