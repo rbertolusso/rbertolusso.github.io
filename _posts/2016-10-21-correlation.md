@@ -7,7 +7,7 @@ tags: [intubate, magrittr, data science]
 date: "2016-10-21"
 ---
 
-This is the first of a series of posts in the subject of linear regression, using R for computational demonstrations and examples. I hope you find it useful, but I am aware it may contains typos and conceptual errors (mostly when I try to think instead of repeat what others thought). Help on correcting/improving these notes is appreciated. This first post deals with the subject of correlation.
+This is the first of a series of posts on the subject of linear regression, using R for computational demonstrations and examples. I hope you find it useful, but I am aware it may contains typos and conceptual errors (mostly when I try to think instead of just repeating what others thought...). Help on correcting/improving these notes is appreciated. This first post deals with the subject of *correlation*.
 
 <hr />
 
