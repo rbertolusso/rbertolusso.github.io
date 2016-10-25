@@ -8,6 +8,8 @@ date: "2016-10-24"
 use_math : true
 ---
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 
 
 This post explores *some* of the possible workarounds that can be employed
