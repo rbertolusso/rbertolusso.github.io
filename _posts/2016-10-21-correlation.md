@@ -5,7 +5,6 @@ author: "Roberto Bertolusso"
 categories: [stat, LR]
 tags: [intubate, magrittr, data science]
 date: "2016-10-21"
-use_math : true
 ---
 
 This is the first of a series of posts in the subject of linear regression, using R for computational demonstrations and examples. I hope you find it useful, but I am aware it may contains typos and conceptual errors (mostly when I try to think instead of repeat what others thought). Help on correcting/improving these notes is appreciated. This first post deals with the subject of correlation.
@@ -363,13 +362,15 @@ axis(2, at = axp, labels = axp)
 
 <img src="/figure/source/2016-10-21-correlation/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
 
-* Let's see again the $r$ formula:
+* Let's see again the formula for $r$:
+
 $$
 r = \frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}
     {\sqrt{\sum_{i=1}^n (x_i-\bar{x})^2}\sqrt{\sum_{i=1}^n (y_i-\bar{y})^2}}
 $$
 
-* We see that it uses *averages*.
+* We see that it uses *averages*:
+
 $$
 \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i \\
 \bar{y} = \frac{1}{n} \sum_{i=1}^n y_i \\
