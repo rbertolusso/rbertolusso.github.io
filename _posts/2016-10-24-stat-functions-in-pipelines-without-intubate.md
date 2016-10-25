@@ -889,4 +889,8 @@ $$
 a = \sqrt{\frac{b}{c}}
 $$
 
+\\[
+a = \sqrt{\frac{b}{c}}
+\\]
+
 <hr />
