@@ -114,7 +114,7 @@ axis(1, at = axp, labels = axp)
 axis(2, at = axp, labels = axp)
 ```
 
-<img src="/figure/source/2016-10-24-correlation/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-LR01-correlation/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
 
 * The scatter diagram above is a
   **cloud** shaped something like a *football*
@@ -148,7 +148,7 @@ axis(2, at = axp, labels = axp)
 abline(a = 0, b = 1, lty = 2)
 ```
 
-<img src="/figure/source/2016-10-24-correlation/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-LR01-correlation/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
   
  * The 45-degree line corresponds the families son's height = father's height.
    e.g.: if father is 72 inches tall then son is 72 inches tall;
@@ -187,7 +187,7 @@ with(subset(father.son, fheight >= 71.5 & fheight < 72.5),
      points(fheight, sheight, col="red"))
 ```
 
-<img src="/figure/source/2016-10-24-correlation/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-LR01-correlation/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" />
 
 * There is still a *lot of variability* in the heights of the sons,
   (see at *vertical* scatter in the chimney).
@@ -333,7 +333,7 @@ diffr(rho = 0, n = 50)
 diffr(rho = -0.80, n = 50)
 ```
 
-<img src="/figure/source/2016-10-24-correlation/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-LR01-correlation/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" />
 
 ```r
 ## What happens if r=1?
@@ -361,7 +361,7 @@ axis(1, at = axp, labels = axp)
 axis(2, at = axp, labels = axp)
 ```
 
-<img src="/figure/source/2016-10-24-correlation/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-LR01-correlation/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
 
 * Let's see again the formula for $r$:
 
@@ -417,7 +417,7 @@ abline(v=meanx, col="green")
 abline(h=meany, col="green")
 ```
 
-<img src="/figure/source/2016-10-24-correlation/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-LR01-correlation/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
 
 * We observe that, *relative* to the point of averages, the points have
   coordinates $(x_i-\bar{x}, y_i-\bar{y})$, and that, always relative
@@ -469,7 +469,7 @@ abline(v=meanx, col="green")
 abline(h=meany, col="green")
 ```
 
-<img src="/figure/source/2016-10-24-correlation/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-24-LR01-correlation/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" />
 
 * Let's find the sums of both groups:
 
