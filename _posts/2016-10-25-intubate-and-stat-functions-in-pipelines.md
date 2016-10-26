@@ -4,14 +4,10 @@ title: "intubate <||> R stat functions in data science pipelines"
 author: "Roberto Bertolusso"
 categories: [intubate, r-project]
 tags: [intubate, magrittr, data science]
-date: "2016-10-24"
+date: "2016-10-25"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, error=TRUE,
-                      fig.align = 'center',
-                      fig.width = 4, fig.height = 4.5)
-```
+
 
 The aim of `intubate` (logo `<||>`) is to offer a painless way to
 add R functions that are non-pipe-aware
@@ -23,13 +19,15 @@ varying complexity.
 
 * the latest released version from CRAN (1.0.0) with
 
-```{r, eval = FALSE}
+
+```r
 install.packages("intubate")
 ```
 
 * the latest development version from github (1.4.0) with
 
-```{r, eval = FALSE}
+
+```r
 # install.packages("devtools")
 devtools::install_github("rbertolusso/intubate")
 ```
@@ -41,7 +39,8 @@ is used here to illustrate data transformations.
 
 Suppose you have the following code:
 
-```{r, message=FALSE}
+
+```r
 library(dplyr)
 
 tmp <- filter(LifeCycleSavings, dpi >= 1000)
@@ -51,7 +50,8 @@ to_fit <- select(tmp, sr, pop15, pop75)
 and you would like to avoid creating the temporary object `tmp`.
 One approach could be the following:
 
-```{r}
+
+```r
 to_fit <- select(filter(LifeCycleSavings, dpi >= 1000), sr, pop15, pop75)
 ```
 
@@ -62,7 +62,8 @@ Pipes in R are made possible by the package `magrittr`,
 by Stefan Milton Bache and Hadley Wickham. They provide
 an elegant alternative:
 
-```{r}
+
+```r
 library(magrittr)
 
 LifeCycleSavings %>% 
@@ -84,9 +85,32 @@ to perform).
 As most R functions are not pipeline-aware, you
 should do something like the following:
 
-```{r}
+
+```r
 fitted <- lm(sr ~ ., to_fit)
 summary(fitted)
+```
+
+```
+## 
+## Call:
+## lm(formula = sr ~ ., data = to_fit)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.5438 -2.1996  0.4071  2.2060  5.4754 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  38.5981     9.6146   4.015 0.000898 ***
+## pop15        -0.6574     0.2481  -2.650 0.016843 *  
+## pop75        -2.7315     1.2458  -2.193 0.042536 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.558 on 17 degrees of freedom
+## Multiple R-squared:  0.3213,	Adjusted R-squared:  0.2415 
+## F-statistic: 4.024 on 2 and 17 DF,  p-value: 0.03709
 ```
 
 This is an absolutely correct approach.
@@ -97,12 +121,17 @@ same pipeline paradigm (by adding lm to it),
 which would impart notation consistency and
 would avoid the need of creating the temporary object `to_fit`?
 
-```{r}
+
+```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
   select(sr, pop15, pop75) %>% 
   lm(sr ~ .) %>%               ## Adding lm to the pipeline
   summary()
+```
+
+```
+## Error in as.data.frame.default(data): cannot coerce class ""formula"" to a data.frame
 ```
 
 You get an **error**.
@@ -129,7 +158,8 @@ following posts.
 
 * The original aim of `intubate` is to offer a *painless* way to add R functions that are *non-pipe-aware* to data science pipelines implemented by 'magrittr' with the operator %>%, without having to rely on *workarounds* of varying complexity.
 
-```{r}
+
+```r
 ## install.packages("intubate")
 library(intubate)
 ```
@@ -137,7 +167,8 @@ library(intubate)
 * To this end, `intubate` provides *interfaces*
 (such as `ntbt_lm`) that let you do:
 
-```{r}
+
+```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
   select(sr, pop15, pop75) %>%
@@ -145,18 +176,65 @@ LifeCycleSavings %>%
   summary()
 ```
 
+```
+## 
+## Call:
+## lm(formula = sr ~ pop15 + pop75)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.5438 -2.1996  0.4071  2.2060  5.4754 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  38.5981     9.6146   4.015 0.000898 ***
+## pop15        -0.6574     0.2481  -2.650 0.016843 *  
+## pop75        -2.7315     1.2458  -2.193 0.042536 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.558 on 17 degrees of freedom
+## Multiple R-squared:  0.3213,	Adjusted R-squared:  0.2415 
+## F-statistic: 4.024 on 2 and 17 DF,  p-value: 0.03709
+```
+
 without error.
 
 <br />
 
 * With `intubate`, you can push boundaries and do things like:
-```{r}
+
+```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
   select(sr, pop15, pop75) %>%
   ntbt_lm(sr ~ pop15 + pop75) %>% 
   ntbt_plot(which = 1) %>%        ## Adding a residual plot
   summary()
+```
+
+<img src="/figure/source/2016-10-25-intubate-and-stat-functions-in-pipelines/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
+
+```
+## 
+## Call:
+## lm(formula = sr ~ pop15 + pop75)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.5438 -2.1996  0.4071  2.2060  5.4754 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  38.5981     9.6146   4.015 0.000898 ***
+## pop15        -0.6574     0.2481  -2.650 0.016843 *  
+## pop75        -2.7315     1.2458  -2.193 0.042536 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.558 on 17 degrees of freedom
+## Multiple R-squared:  0.3213,	Adjusted R-squared:  0.2415 
+## F-statistic: 4.024 on 2 and 17 DF,  p-value: 0.03709
 ```
 (as `plot` returns `NULL`, `intubate` automatically forwards
 its input so `summary` receives the result of `lm`).
@@ -176,9 +254,20 @@ its input so `summary` receives the result of `lm`).
 
 * If you do not want to use interfaces, you can use the function
 `ntbt` to call the non-pipe-aware functions directly "on the fly":
-```{r}
+
+```r
 LifeCycleSavings %>% 
   ntbt(lm, sr ~ pop15 + pop75)
+```
+
+```
+## 
+## Call:
+## lm(formula = sr ~ pop15 + pop75)
+## 
+## Coefficients:
+## (Intercept)        pop15        pop75  
+##     30.6277      -0.4708      -1.9341
 ```
 Note: this approach works with any function, including the ones lacking
 interfaces.
@@ -188,12 +277,15 @@ interfaces.
 * For example, `lsfit` does not currently have an interface provided
   by `intubate`, but you still can call it "on the fly" with `ntbt`:
   
-```{r}
+
+```r
 LifeCycleSavings %>%
   ntbt_plot(pop75, sr) %>%
   ntbt(lsfit, pop75, sr) %>%    # Calling lsfit "on the fly" with ntbt
   abline()
 ```
+
+<img src="/figure/source/2016-10-25-intubate-and-stat-functions-in-pipelines/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" style="display: block; margin: auto;" />
   
 ### Creating interfaces "on demand"
 
@@ -201,7 +293,8 @@ LifeCycleSavings %>%
 you can create your own "on demand". For example, to create an
 interface to `lsfit`, all that is needed is the following line:
 
-```{r}
+
+```r
 ntbt_lsfit <- intubate
 ```
 
@@ -215,12 +308,15 @@ interface.
 You can now use the newly created interface as any other provided
 by `intubate`:
 
-```{r}
+
+```r
 LifeCycleSavings %>%
   ntbt_plot(pop75, sr) %>%
   ntbt_lsfit(pop75, sr) %>%    # Using just created "on demand" interface
   abline()
 ```
+
+<img src="/figure/source/2016-10-25-intubate-and-stat-functions-in-pipelines/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" style="display: block; margin: auto;" />
 
 
 Just in case, let's clarify that the `intubate` machinery does not perform any
@@ -231,35 +327,75 @@ statistical computation. The *interfaced* functions
 Some functions offer non-formula variants (or both variants). For example,
 including `cor.test` in a pipeline in any of its variants produces an error:
 
-```{r}
+
+```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
   select(sr, pop15, pop75) %>%
   cor.test(pop15, pop75)   ## Non-formula variant
 ```
 
+```
+## Error in match.arg(alternative): object 'pop75' not found
+```
+
 or:
-```{r}
+
+```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
   select(sr, pop15, pop75) %>%
   cor.test(~ pop15 + pop75)   ## Formula variant
 ```
 
+```
+## Error in cor.test.default(., ~pop15 + pop75): 'x' and 'y' must have the same length
+```
+
 Both variants work when using any of the approaches provided by `intubate`:
-```{r}
+
+```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
   select(sr, pop15, pop75) %>%
   ntbt_cor.test(pop15, pop75)   ## Non-formula variant
 ```
 
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  pop15 and pop75
+## t = -2.4193, df = 18, p-value = 0.02636
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.76924958 -0.06766132
+## sample estimates:
+##        cor 
+## -0.4953505
+```
+
 or:
-```{r}
+
+```r
 LifeCycleSavings %>% 
   filter(dpi >= 1000) %>% 
   select(sr, pop15, pop75) %>%
   ntbt(cor.test, ~ pop15 + pop75)   ## Formula variant
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  pop15 and pop75
+## t = -2.4193, df = 18, p-value = 0.02636
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.76924958 -0.06766132
+## sample estimates:
+##        cor 
+## -0.4953505
 ```
 
 ## Appendix
