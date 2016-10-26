@@ -2,8 +2,8 @@
 layout: post
 title: "Workarounds to include R stat functions in data science pipelines"
 author: "Roberto Bertolusso"
-categories: [intubate, r-project]
-tags: [intubate, magrittr, data science]
+categories: [intubate]
+tags: [intubate, magrittr, data science, R, r-project, statistics]
 date: "2016-10-26"
 use_math : true
 ---

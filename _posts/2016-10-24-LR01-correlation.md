@@ -2,8 +2,8 @@
 layout: post
 title: "LR01: Correlation"
 author: "Roberto Bertolusso"
-categories: [stat, LR]
-tags: [intubate, magrittr, data science]
+categories: [Linear Regression]
+tags: [intubate, magrittr, data science, statistics]
 date: "2016-10-24"
 ---
 
