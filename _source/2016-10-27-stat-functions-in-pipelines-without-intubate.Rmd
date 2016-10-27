@@ -4,8 +4,7 @@ title: "Workarounds to include R stat functions in data science pipelines"
 author: "Roberto Bertolusso"
 categories: [intubate]
 tags: [intubate, magrittr, data science, R, r-project, statistics]
-date: "2016-10-26"
-use_math : true
+date: "2016-10-27"
 ---
 
 This post explores *some* of the possible workarounds that can be employed
@@ -134,7 +133,7 @@ Orthodont %>%
 
 Having to remember the name of the
 parameter associated to the model in each case
-may be error prone, and gives an
+is inconvenient, may be error prone, and gives an
 inconsistent look and feel to an otherwise elegant
 interface.
 
@@ -155,7 +154,7 @@ raise an error *even if you name the model*.
 
 In fact, there are cases where it is *not
 true* that if in a function call you name the parameters
-you can write them in any order you want?
+you can write them in any order you want.
 
 One example is `cor.test`:
 
