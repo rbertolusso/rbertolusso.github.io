@@ -4,7 +4,7 @@ title: "intubate <||> R stat functions in data science pipelines"
 author: "Roberto Bertolusso"
 categories: [intubate]
 tags: [intubate, magrittr, data science, R, r-project, statistics]
-date: "2016-10-26"
+date: "2016-10-27"
 ---
 
 ```{r setup, include=FALSE}

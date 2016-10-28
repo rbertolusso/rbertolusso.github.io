@@ -596,11 +596,14 @@ $$
 $$
 
 * **Important note**: we are using capital letters here to indicate that
-  $X_i$ and $Y_i$ are random samples (random variables themselves)
-  from random variables $X$ and $Y$, and that we want to *estimate*
-  the populations $\text{Cov}(X, Y)$, $\sigma_X$, and $\sigma_Y$
-  using the random samples. So these are general procedures that will
-  produce different estimates for every *realization*, because they are
+  $X_i$ and $Y_i$ are being considered *random samples* (random variables themselves)
+  from *random variables* $X$ and $Y$, and that we want to *estimate*
+  the population $\text{Cov}(X, Y)$, $\sigma_X$, and $\sigma_Y$
+  using the random samples.
+  $\hat{\text{Cov}}(X, Y)$, $\hat{\sigma}_X$, and $\hat{\sigma}_Y$ will be used
+  as *estimators* of their population counterparts.
+  So these are general procedures that will
+  produce different *estimates* for every *realization*, because they are
   random procedures, as they depends on random variables (a random sample
   is a collection of iid random variables).
   In the derivations above we are using lower case letters because:
@@ -610,9 +613,10 @@ $$
     2. and/or because we are not necessarily considering that they are the result
        of a random sampling. In other words, you could potentially find the
        "correlation" of any two groups of paired values.
-       The fact that doing that may be a bad idea belongs to a different discussion.
+       The fact that doing that may be a good or bad idea belongs to a
+       different discussion.
        We are still not making any probabilistic or statistical assumption about
-       the origin of the data.
+       the origin of the data, as it happens in *descriptive statistics*.
        We only said that the sensible thing to do would be to use correlation for
        football-shaped clouds of points (which intrinsically means that they
        *should* have been generated from a bivariate normal distribution...).
