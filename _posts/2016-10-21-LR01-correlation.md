@@ -4,7 +4,7 @@ title: "LR01: Correlation"
 author: "Roberto Bertolusso"
 categories: [Linear Regression]
 tags: [intubate, magrittr, data science, statistics]
-date: "2016-10-25"
+date: "2016-10-21"
 ---
 
 This is the first of a series of posts on the subject of linear regression, using R for computational demonstrations and examples. I hope you find it useful, but I am aware it may contains typos and conceptual errors (mostly when I try to think instead of just repeating what others thought...). Help on correcting/improving these notes is appreciated. This first post deals with the subject of *correlation*.
@@ -38,7 +38,8 @@ of parents and sons.
 * Galton's disciple Karl Pearson (England, 1857-1936) measured the heights of 1,078 fathers and their
 sons at maturity.
 
-```{r, message=FALSE}
+
+```r
 ## install.packages("UsingR")
 library(UsingR)
 
@@ -46,9 +47,48 @@ library(UsingR)
 ## Father and son data
 data(father.son)
 dim(father.son)
+```
+
+```
+## [1] 1078    2
+```
+
+```r
 str(father.son)
+```
+
+```
+## 'data.frame':	1078 obs. of  2 variables:
+##  $ fheight: num  65 63.3 65 65.8 61.1 ...
+##  $ sheight: num  59.8 63.2 63.3 62.8 64.3 ...
+```
+
+```r
 head(father.son)   ## First six pairs
+```
+
+```
+##    fheight  sheight
+## 1 65.04851 59.77827
+## 2 63.25094 63.21404
+## 3 64.95532 63.34242
+## 4 65.75250 62.79238
+## 5 61.13723 64.28113
+## 6 63.02254 64.24221
+```
+
+```r
 tail(father.son)   ## Last six pairs
+```
+
+```
+##       fheight  sheight
+## 1073 67.70657 59.81693
+## 1074 66.99681 70.75232
+## 1075 71.33181 68.26774
+## 1076 71.78314 69.30589
+## 1077 70.73837 69.30199
+## 1078 70.30609 67.01500
 ```
 
 * 1,078 pairs of heights are hard to grasp.
@@ -59,7 +99,8 @@ tail(father.son)   ## Last six pairs
      - x-coordinate: the height of the father.
      - y-coordinate: the height of the son.
 
-```{r, fig.width=6, fig.height=6.5, fig.align='center'}
+
+```r
 x <- father.son$fheight
 y <- father.son$sheight
 
@@ -72,6 +113,8 @@ axp <- seq(58, 80, by = 2)
 axis(1, at = axp, labels = axp)
 axis(2, at = axp, labels = axp)
 ```
+
+<img src="/figure/source/2016-10-21-LR01-correlation/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
 
 * The scatter diagram above is a
   **cloud** shaped something like a *football*
@@ -91,7 +134,8 @@ axis(2, at = axp, labels = axp)
 
 * Let's draw a 45-degree line $y = x$. (What would it represent?)
 
-```{r, fig.width=6, fig.height=6.5, fig.align='center'}
+
+```r
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80),
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -103,6 +147,8 @@ axis(2, at = axp, labels = axp)
 
 abline(a = 0, b = 1, lty = 2)
 ```
+
+<img src="/figure/source/2016-10-21-LR01-correlation/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
   
  * The 45-degree line corresponds the families son's height = father's height.
    e.g.: if father is 72 inches tall then son is 72 inches tall;
@@ -121,7 +167,8 @@ abline(a = 0, b = 1, lty = 2)
 * Let's draw a *chimney* containing father-son pairs where the father is 72 inches
   tall to the nearest inch ($71.50 \leq x < 72.49$).
   
-```{r, fig.width=6, fig.height=6.5, fig.align='center'}
+
+```r
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80),
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -139,6 +186,8 @@ abline(v=c(71.5, 72.5), lty = 3)
 with(subset(father.son, fheight >= 71.5 & fheight < 72.5),
      points(fheight, sheight, col="red"))
 ```
+
+<img src="/figure/source/2016-10-21-LR01-correlation/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" />
 
 * There is still a *lot of variability* in the heights of the sons,
   (see at *vertical* scatter in the chimney).
@@ -227,7 +276,8 @@ where $(x_1, y_1)$, $(x_2, y_2)$, $\cdots$, $(x_n, y_n)$ are the $n$ sample pair
   By the way, at least to my knowledge, $r$ is always
   given in lower case, even when considered a random variable.
 
-```{r}
+
+```r
 ## Generating correlated Normal data
 
 diffr1 <- function(n, rho, SDx = 1, SDy = 1) {
@@ -273,13 +323,19 @@ diffr <- diffr1
 * Let's see some randomly generated cases corresponding to
   a populations with given $\rho$:
   
-```{r, fig.width=8, fig.height=2.67, fig.align='center'}
+
+```r
 set.seed(123)
 par(mai = c(.2, .2, .2, .2), mgp = c(1.5, 0.2, 0),
     tck = -.01, mfrow = c(1,3))
 diffr(rho = 0.80, n = 50)
 diffr(rho = 0, n = 50)
 diffr(rho = -0.80, n = 50)
+```
+
+<img src="/figure/source/2016-10-21-LR01-correlation/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" />
+
+```r
 ## What happens if r=1?
 ```
 
@@ -293,7 +349,8 @@ diffr(rho = -0.80, n = 50)
 * Discussion (with your colleagues): why $r$ has to be positive in the
   case of father and son's data? (Hint: look at the definition of $r$)
 
-```{r, fig.width=6, fig.height=6.5, fig.align='center'}
+
+```r
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80),
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -303,6 +360,8 @@ axp <- seq(58, 80, by = 2)
 axis(1, at = axp, labels = axp)
 axis(2, at = axp, labels = axp)
 ```
+
+<img src="/figure/source/2016-10-21-LR01-correlation/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
 
 * Let's see again the formula for $r$:
 
@@ -319,9 +378,21 @@ $$
 $$
 
  Let's get them using R:
-```{r}
+
+```r
 (meanx <- mean(x))
+```
+
+```
+## [1] 67.6871
+```
+
+```r
 (meany <- mean(y))
+```
+
+```
+## [1] 68.68407
 ```
 
 * The pair $(\bar{x}, \bar{y})$ is called the
@@ -330,7 +401,8 @@ $$
 * Let's draw a horizontal and a vertical line passing through
   the point of averages:
   
-```{r, fig.width=6, fig.height=6.5, fig.align='center'}
+
+```r
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80),
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -345,6 +417,8 @@ abline(v=meanx, col="green")
 abline(h=meany, col="green")
 ```
 
+<img src="/figure/source/2016-10-21-LR01-correlation/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
+
 * We observe that, *relative* to the point of averages, the points have
   coordinates $(x_i-\bar{x}, y_i-\bar{y})$, and that, always relative
   to the point of averages, the points are situated in four quadrants.
@@ -358,11 +432,20 @@ $$
 
 Let's calculate those products with R:
 
-```{r}
+
+```r
 num_prod <- (x-meanx)*(y-meany)
 
 ## See the first results
 num_prod[1:30]
+```
+
+```
+##  [1] 23.4987260 24.2659096 14.5921950 11.3980443 28.8386686 20.7193070
+##  [7] 10.6602839 13.8920687  6.6026866  3.3860013 29.8522714 15.8488740
+## [13] 12.0660676 11.7337326 10.1656882  9.8610550  4.8145636  6.6206614
+## [19]  1.1508456  2.9634055 -0.3923032 -5.8598975 10.8071150  8.9388582
+## [25]  8.1936002  7.3768431  8.1223945  4.3498337  6.4173945  5.7854412
 ```
 
 Most are positive, but some are negative.
@@ -370,7 +453,8 @@ Most are positive, but some are negative.
 * Let's color each point according to the sign (positive or zero: blue, negative: red)
   of the result of the products:
   
-```{r, fig.width=6, fig.height=6.5, fig.align='center'}
+
+```r
 col <- ifelse(num_prod >= 0, "blue", "red")
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80),
@@ -385,19 +469,38 @@ abline(v=meanx, col="green")
 abline(h=meany, col="green")
 ```
 
+<img src="/figure/source/2016-10-21-LR01-correlation/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" />
+
 * Let's find the sums of both groups:
 
-```{r}
+
+```r
 (sum_pos_num_prod <- sum(num_prod[num_prod >= 0]))
+```
+
+```
+## [1] 4975.409
+```
+
+```r
 (sum_neg_num_prod <- sum(num_prod[num_prod < 0]))
+```
+
+```
+## [1] -803.8301
 ```
 
 * We observe that the sum of the positive products is greater (in absolute value)
   than the sum of the negative products (also in absolute value).
 
 Then:
-```{r}
+
+```r
 (total_sum_num_prod <- sum_pos_num_prod + sum_neg_num_prod)
+```
+
+```
+## [1] 4171.579
 ```
 
 will be positive.
@@ -414,22 +517,44 @@ $$
   \sqrt{\sum_{i=1}^n (x_i-\bar{x})^2} ~~~~~~\text{ and }~~~~~~ \sqrt{\sum_{i=1}^n (y_i-\bar{y})^2}
 $$
 
-```{r}
+
+```r
 (kind_of_sdx <- sqrt(sum((x - meanx)^2)))
+```
+
+```
+## [1] 90.08021
+```
+
+```r
 (kind_of_sdy <- sqrt(sum((y - meany)^2)))
 ```
 
+```
+## [1] 92.37197
+```
+
 and we are set!
-```{r}
+
+```r
 (r <- total_sum_num_prod / (kind_of_sdx * kind_of_sdy))
+```
+
+```
+## [1] 0.5013383
 ```
 
 * Of course, we did not need to sweat this much. We could just have asked R
   for it (in retrospective, I do not know why we did the above, when we could
   have just done):
   
-```{r}
+
+```r
 cor(x, y)
+```
+
+```
+## [1] 0.5013383
 ```
 
 * Let's play with the formula of $r$:
@@ -504,8 +629,13 @@ $$
 
 that resembles the population counterpart, and we can easily "verify" with R:
 
-```{r}
+
+```r
 (r <- cov(x, y)/ (sd(x)*sd(y)))
+```
+
+```
+## [1] 0.5013383
 ```
 
 * The last variant:
@@ -519,7 +649,8 @@ in *standard units*, divided by $n - 1$.
 
 Again, using R for "confirmation":
 
-```{r}
+
+```r
 su <- function(x)
   (x-mean(x))/sd(x)
 
@@ -529,6 +660,10 @@ suy <- su(y)
 n <- length(x)         ## Could also be length(y)
 
 sum(sux * suy) / (n - 1)
+```
+
+```
+## [1] 0.5013383
 ```
 
 * There are other variants (we may see them later again). One that is computationally
@@ -575,19 +710,48 @@ $$
 
 "Proofs" using R:
 
-```{r}
-cor(x, y)
 
+```r
+cor(x, y)
+```
+
+```
+## [1] 0.5013383
+```
+
+```r
 ## 4
 cor(y, x)
+```
 
+```
+## [1] 0.5013383
+```
+
+```r
 ## 5
 cor(x, 5 + y)
+```
 
+```
+## [1] 0.5013383
+```
+
+```r
 ## 6
 cor(x, 3 * y)
+```
 
+```
+## [1] 0.5013383
+```
+
+```r
 ## 7 (5 and 6)
 cor(x, 5 + 3 * y)
+```
+
+```
+## [1] 0.5013383
 ```
 

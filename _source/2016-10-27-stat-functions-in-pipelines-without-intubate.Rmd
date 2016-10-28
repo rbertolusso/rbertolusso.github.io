@@ -4,7 +4,7 @@ title: "Workarounds to include R stat functions in data science pipelines"
 author: "Roberto Bertolusso"
 categories: [intubate]
 tags: [intubate, magrittr, data science, R, r-project, statistics]
-date: "2016-10-28"
+date: "2016-10-27"
 ---
 
 This post explores *some* of the possible workarounds that can be employed
