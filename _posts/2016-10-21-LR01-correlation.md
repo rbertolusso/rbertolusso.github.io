@@ -16,7 +16,7 @@ This is the first of a series of posts on the subject of linear regression, usin
 
 * Acknowledgments: organization is extracted from:
   - *Freedman, Pisani, Purves, Statistics, 4th ed.*, probably
-  the best book on statistical thinking (it maybe has a total of 4-5 formulas).
+  the best book on statistical thinking (it maybe has a total of 4-5 formulas). It is referred here as FPP.
   - A lot of what is good is due to Professor Rudy Guerra.
 
 <hr />
@@ -755,3 +755,6 @@ cor(x, 5 + 3 * y)
 ## [1] 0.5013383
 ```
 
+### Next
+
+<a href="https://rbertolusso.github.io/posts/LR02-SDline-GoA-regression">LR02: SD line, GoA, Regression</a>

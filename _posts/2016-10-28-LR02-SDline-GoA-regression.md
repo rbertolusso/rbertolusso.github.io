@@ -27,7 +27,7 @@ We will try to answer the following questions:
 
 * Acknowledgments: organization is extracted from:
   - *Freedman, Pisani, Purves, Statistics, 4th ed.*, probably
-  the best book on statistical thinking (it maybe has a total of 4-5 formulas).
+  the best book on statistical thinking (it maybe has a total of 4-5 formulas). It is referred here as FPP.
   - A lot of what is good is due to Professor Rudy Guerra.
 
 <hr />
@@ -102,6 +102,8 @@ sd(y)
 ## [1] 0.5013383
 ```
 
+<br />
+
 ### Some situations where correlation should not be used
 
 * Correlation coefficient: useful for *football-shaped* scatter diagrams.
@@ -113,6 +115,8 @@ sd(y)
 
 * Remember: $r$ measures **linear** association, not association in general.
 
+<br />
+
 ### Association is not causation
 
 * Example from FPP: "for school children, shoe size is strongly correlated with
@@ -123,6 +127,7 @@ sd(y)
   spot. Often, this is not so easy. And *the arithmetic of the correlation
   coefficient does not protect you against third factors*."
 
+<br />
 
 ### Ecological correlations (misleading use of correlation)
 * What are ecological correlations? Correlations done on ecological data? No. It is
@@ -188,7 +193,6 @@ byg %>%
 <img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" />
 
 
-
 * The left panel contains the raw data, the right panel aggregate data
  (means of each group). Ecological correlation means calculating the
  correlation from the data in the right panel, instead than from data
@@ -218,7 +222,7 @@ byg %>%
 * Correlations based on **rates** or **averages** can be **misleading**.
 
 * This ends our discussion about Ecological correlations. We will continue
-with "normal" correlations.
+with "normal" correlations from now on.
 
 <hr />
 
@@ -231,6 +235,8 @@ with "normal" correlations.
 
 
 <img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/plot-cor-1.png" title="plot of chunk plot-cor" alt="plot of chunk plot-cor" style="display: block; margin: auto;" />
+
+<br />
 
 ### Changing SDs
 
@@ -279,7 +285,9 @@ diffr(rho = 0.70, n = 50, SDx = 1.1, SDy = .3)
 diffr(rho = 0.70, n = 50, SDx = 1, SDy = 1.3)
 ```
 
-### Note on calculation of the standard deviation
+<br />
+
+### Discussion on calculation of the standard deviation
 
 For simplicity, FPP use, unless it was a very small sample, SD instead of sd.
 SD is obtained by dividing by $n$ instead of by $n - 1$ (R has `sd`
@@ -341,6 +349,8 @@ $n$ instead of $n-1$, so it is biased (and used).
 We will show both approaches, that lead mostly to the same *final* results,
 pointing out when they disagree.
 
+<br />
+
 ### The SD line
 
 * The SD line goes through the *point of averages*, passing
@@ -384,7 +394,8 @@ abline(a = meany - sd(y)/sd(x)*meanx,
        b = sd(y)/sd(x), col = "blue", lwd = 4)
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/SD-line-1.png" title="plot of chunk SD-line" alt="plot of chunk SD-line" style="display: block; margin: auto;" />
+
 
 * Note that it does not matter which version of standard deviation was
 used (SD or sd). Why?
@@ -393,7 +404,9 @@ used (SD or sd). Why?
   averages, would it be your best guess (prediction) of the
   son's height the corresponding point on the SD line?
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/Points-and-SD-line-1.png" title="plot of chunk Points-and-SD-line" alt="plot of chunk Points-and-SD-line" style="display: block; margin: auto;" />
+
+<br />
 
 ### The graph of averages
 
@@ -406,18 +419,15 @@ used (SD or sd). Why?
 
 
 ```r
-## Point of averages (center of the cloud)
-abline(v=meanx, col="green")
-abline(h=meany, col="green")
-
 ## Graph of averages.
 sgav <- with(father.son, tapply(sheight, round(fheight,0), mean))
 sgavnum <- with(father.son, tapply(sheight, round(fheight,0), length))
+
 points(as.numeric(names(sgav)), sgav, col="red", pch=16)
 text(as.numeric(names(sgav)), sgav, sgavnum, pos=3)
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/GoA-1.png" title="plot of chunk GoA" alt="plot of chunk GoA" style="display: block; margin: auto;" />
 
 * The GoA is close to a straight line in the middle, but not at the ends.
   Why do you think that happens?
@@ -425,14 +435,9 @@ text(as.numeric(names(sgav)), sgav, sgavnum, pos=3)
 * T or F: If we add to the GoA plot the SD line, would it more or less
   follow the GoA?
 
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/SD-GoA-1.png" title="plot of chunk SD-GoA" alt="plot of chunk SD-GoA" style="display: block; margin: auto;" />
 
-```r
-## SD line using equation and sd
-abline(a = meany - sd(y)/sd(x)*meanx,
-       b = sd(y)/sd(x), col = "blue", lwd = 4)
-```
-
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
+<br />
 
 ### The Regression line and the Regression function
 
@@ -441,7 +446,13 @@ abline(a = meany - sd(y)/sd(x)*meanx,
   a scatterplot that is a *football-shaped* cloud of points),
   that straight line *is* the regression line.
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" />
+
+```r
+## Regression line
+abline(a=meany-r*sd(y)/sd(x)*meanx, b=r*sd(y)/sd(x), lwd=4, col="red")
+```
+
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/Regression-line-1.png" title="plot of chunk Regression-line" alt="plot of chunk Regression-line" style="display: block; margin: auto;" />
 
 * In general, we could say that the regression
   *function* (meaning *not limited to a straight line*)
@@ -498,13 +509,7 @@ $$
 
 While you think we will put everything in one plot:
 
-
-```r
-## Regression line
-abline(a=meany-r*sd(y)/sd(x)*meanx, b=r*sd(y)/sd(x), lwd=4, col="red")
-```
-
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/Everything-1.png" title="plot of chunk Everything" alt="plot of chunk Everything" style="display: block; margin: auto;" />
 
 * The regression line is an *attenuated* version of the SD line. In the SD line,
  when you move 1 SDx to the right, you go 1 SDx above (or below for negative $r$).
@@ -516,3 +521,212 @@ abline(a=meany-r*sd(y)/sd(x)*meanx, b=r*sd(y)/sd(x), lwd=4, col="red")
   
 * Answer:
     - It is the SD line.
+
+<hr />
+
+### Appendix
+
+#### Complete code to produce the SD line plot
+
+
+```r
+plot(x, y,
+     xlim = c(58, 80), ylim = c(58, 80),
+     xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
+     main = "Pearson's data. SD line",
+     xlab = "Father height in inches", ylab = "Son height in inches")
+axp <- seq(58, 80, by = 2)
+axis(1, at = axp, labels = axp)
+axis(2, at = axp, labels = axp)
+
+## Spread of the cloud
+abline(v=meanx+c(-1,1)*sd(x), col="blue", lty=3)
+abline(h=meany+c(-1,1)*sd(y), col="blue", lty=3)
+abline(v=meanx+c(-2,2)*sd(x), col="blue", lty=3)
+abline(h=meany+c(-2,2)*sd(y), col="blue", lty=3)
+abline(v=meanx+c(-3,3)*sd(x), col="blue", lty=3)
+abline(h=meany+c(-3,3)*sd(y), col="blue", lty=3)
+
+## Point of averages (center of the cloud)
+abline(v=meanx, col="green")
+abline(h=meany, col="green")
+
+## SD line using equation and FFP SD
+abline(a = meany - SD(y)/SD(x)*meanx,
+       b = SD(y)/SD(x), col = "blue", lwd = 4)
+
+## SD line using equation and sd
+abline(a = meany - sd(y)/sd(x)*meanx,
+       b = sd(y)/sd(x), col = "blue", lwd = 4)
+```
+
+#### Complete code to produce points in relation to the SD line plot
+
+
+```r
+plot(x, y,
+     xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
+     xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
+     main = "Pearson's data. SD line",
+     xlab = "Father height in inches", ylab = "Son height in inches")
+axp <- seq(58, 80, by = 2)
+axis(1, at = axp, labels = axp)
+axis(2, at = axp, labels = axp)
+
+## Spread of the cloud
+abline(v=meanx+c(-2,2)*sd(x), col="blue", lty=3)
+abline(h=meany+c(-2,2)*sd(y), col="blue", lty=3)
+
+## Point of averages (center of the cloud)
+abline(v=meanx, col="green")
+abline(h=meany, col="green")
+
+## SD line using equation and sd
+abline(a = meany - sd(y)/sd(x)*meanx,
+       b = sd(y)/sd(x), col = "blue", lwd = 4)
+
+fround <- 72
+abline(v=fround+c(-.5,.5), lty=3)
+with(subset(father.son, round(fheight,0) == fround),
+     points(fheight, sheight, 
+            pch=16, col=ifelse(sheight > meany + (fheight-meanx)/sd(x)*sd(y), "darkgreen", "blue")))
+
+fround <- 64
+abline(v=fround+c(-.5,.5), lty=3)
+with(subset(father.son, round(fheight,0) == fround),
+     points(fheight, sheight,
+            pch=16, col=ifelse(sheight > meany + (fheight-meanx)/sd(x)*sd(y), "darkgreen", "blue")))
+```
+
+#### Complete code to produce the Graph of Averages plot
+
+
+```r
+plot(x, y,
+     xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
+     xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
+     main = "Pearson's data. GoA",
+     xlab = "Father height in inches", ylab = "Son height in inches")
+axp <- seq(58, 80, by = 2)
+axis(1, at = axp, labels = axp)
+axis(2, at = axp, labels = axp)
+
+## Point of averages (center of the cloud)
+abline(v=meanx, col="green")
+abline(h=meany, col="green")
+
+## Graph of averages.
+sgav <- with(father.son, tapply(sheight, round(fheight,0), mean))
+sgavnum <- with(father.son, tapply(sheight, round(fheight,0), length))
+
+points(as.numeric(names(sgav)), sgav, col="red", pch=16)
+text(as.numeric(names(sgav)), sgav, sgavnum, pos=3)
+```
+
+#### Complete code to produce the Graph of Averages + SD line plot
+
+
+```r
+plot(x, y,
+     xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
+     xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
+     main = "Pearson's data. SD line and GoA",
+     xlab = "Father height in inches", ylab = "Son height in inches")
+axp <- seq(58, 80, by = 2)
+axis(1, at = axp, labels = axp)
+axis(2, at = axp, labels = axp)
+
+## Point of averages (center of the cloud)
+abline(v=meanx, col="green")
+abline(h=meany, col="green")
+
+## SD line using equation and sd
+abline(a = meany - sd(y)/sd(x)*meanx,
+       b = sd(y)/sd(x), col = "blue", lwd = 4)
+
+## Graph of averages.
+sgav <- with(father.son, tapply(sheight, round(fheight,0), mean))
+points(as.numeric(names(sgav)), sgav, col="red", pch=16)
+```
+
+#### Complete code to produce the Regression line plot
+
+
+```r
+plot(x, y,
+     xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
+     xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
+     main = "Pearson's data. Regression line and GoA",
+     xlab = "Father height in inches", ylab = "Son height in inches")
+axp <- seq(58, 80, by = 2)
+axis(1, at = axp, labels = axp)
+axis(2, at = axp, labels = axp)
+
+## Point of averages (center of the cloud)
+abline(v=meanx, col="green")
+abline(h=meany, col="green")
+
+## Graph of averages.
+sgav <- with(father.son, tapply(sheight, round(fheight,0), mean))
+points(as.numeric(names(sgav)), sgav, col="red", pch=16)
+
+## Regression line
+abline(a=meany-r*sd(y)/sd(x)*meanx, b=r*sd(y)/sd(x), lwd=4, col="red")
+
+fround <- 72
+abline(v=fround+c(-.5,.5), lty=3)
+with(subset(father.son, round(fheight,0) == fround),
+     points(fheight, sheight, 
+            pch=16, col=ifelse(sheight > meany + (fheight-meanx)/sd(x)*sd(y)*r, "darkgreen", "blue")))
+
+fround <- 64
+abline(v=fround+c(-.5,.5), lty=3)
+with(subset(father.son, round(fheight,0) == fround),
+     points(fheight, sheight,
+            pch=16, col=ifelse(sheight > meany + (fheight-meanx)/sd(x)*sd(y)*r, "darkgreen", "blue")))
+```
+
+#### Complete code to produce the plot with everything
+
+
+```r
+plot(x, y,
+     xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
+     xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
+     main = "Pearson's data. SD line, regression line and GoA",
+     xlab = "Father height in inches", ylab = "Son height in inches")
+axp <- seq(58, 80, by = 2)
+axis(1, at = axp, labels = axp)
+axis(2, at = axp, labels = axp)
+
+## Point of averages (center of the cloud)
+abline(v=meanx, col="green")
+abline(h=meany, col="green")
+
+## SD line using equation and sd
+abline(a = meany - sd(y)/sd(x)*meanx,
+       b = sd(y)/sd(x), col = "blue", lwd = 4)
+
+## Graph of averages.
+sgav <- with(father.son, tapply(sheight, round(fheight,0), mean))
+points(as.numeric(names(sgav)), sgav, col="red", pch=16)
+
+## Regression line
+abline(a=meany-r*sd(y)/sd(x)*meanx, b=r*sd(y)/sd(x), lwd=4, col="red")
+
+fround <- 72
+abline(v=fround+c(-.5,.5), lty=3)
+with(subset(father.son, round(fheight,0) == fround),
+     points(fheight, sheight, 
+            pch=16, col=ifelse(sheight > meany + (fheight-meanx)/sd(x)*sd(y)*r, "darkgreen", "blue")))
+
+fround <- 64
+abline(v=fround+c(-.5,.5), lty=3)
+with(subset(father.son, round(fheight,0) == fround),
+     points(fheight, sheight,
+            pch=16, col=ifelse(sheight > meany + (fheight-meanx)/sd(x)*sd(y)*r, "darkgreen", "blue")))
+```
+
+### Previous
+
+<a href="https://rbertolusso.github.io/posts/LR01-correlation">LR01: Correlation</a>

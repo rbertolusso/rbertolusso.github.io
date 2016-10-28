@@ -31,7 +31,7 @@ We will try to answer the following questions:
 
 * Acknowledgments: organization is extracted from:
   - *Freedman, Pisani, Purves, Statistics, 4th ed.*, probably
-  the best book on statistical thinking (it maybe has a total of 4-5 formulas).
+  the best book on statistical thinking (it maybe has a total of 4-5 formulas). It is referred here as FPP.
   - A lot of what is good is due to Professor Rudy Guerra.
 
 <hr />
@@ -74,6 +74,8 @@ sd(y)
 (r <- cor(x, y))
 ```
 
+<br />
+
 ### Some situations where correlation should not be used
 
 * Correlation coefficient: useful for *football-shaped* scatter diagrams.
@@ -85,6 +87,8 @@ sd(y)
 
 * Remember: $r$ measures **linear** association, not association in general.
 
+<br />
+
 ### Association is not causation
 
 * Example from FPP: "for school children, shoe size is strongly correlated with
@@ -95,6 +99,7 @@ sd(y)
   spot. Often, this is not so easy. And *the arithmetic of the correlation
   coefficient does not protect you against third factors*."
 
+<br />
 
 ### Ecological correlations (misleading use of correlation)
 * What are ecological correlations? Correlations done on ecological data? No. It is
@@ -154,7 +159,6 @@ byg %>%
 ```
 
 
-
 * The left panel contains the raw data, the right panel aggregate data
  (means of each group). Ecological correlation means calculating the
  correlation from the data in the right panel, instead than from data
@@ -181,11 +185,11 @@ byg %>%
 * Correlations based on **rates** or **averages** can be **misleading**.
 
 * This ends our discussion about Ecological correlations. We will continue
-with "normal" correlations.
+with "normal" correlations from now on.
 
 <hr />
 
-```{r gen-corr, echo=FALSE}
+```{r gen-cor, echo=FALSE}
 ## Generating correlated Normal data
 diffr <- function(n, rho, SDx = 1, SDy = 1) {
   meanx <- 3; meany <- 3
@@ -218,6 +222,8 @@ diffr(rho = 0.70, n = 50, SDx = 1.1, SDy = .3)
 diffr(rho = 0.70, n = 50, SDx = 1, SDy = 1.3)
 ```
 
+<br />
+
 ### Changing SDs
 
 * The appearance of a scatter diagram depends on the SDs. In fact, both plots
@@ -237,12 +243,14 @@ diffr(rho = 0.70, n = 50, SDx = 1, SDy = 1.3)
   looking at the scatterplot?
 
 * Below is the code that generated the figures above:
-```{r gen-corr, eval=FALSE}
+```{r gen-cor, eval=FALSE}
 ```
 ```{r plot-cor, eval=FALSE}
 ```
 
-### Note on calculation of the standard deviation
+<br />
+
+### Discussion on calculation of the standard deviation
 
 For simplicity, FPP use, unless it was a very small sample, SD instead of sd.
 SD is obtained by dividing by $n$ instead of by $n - 1$ (R has `sd`
@@ -292,6 +300,8 @@ $n$ instead of $n-1$, so it is biased (and used).
 We will show both approaches, that lead mostly to the same *final* results,
 pointing out when they disagree.
 
+<br />
+
 ### The SD line
 
 * The SD line goes through the *point of averages*, passing
@@ -320,7 +330,7 @@ $$
 where $\frac{\text{SD}_y}{\text{SD}_x}$ is the slope and $\bar{y}-\frac{\text{SD}_y}{\text{SD}_x}\bar{x}$
 is the intercept.
 
-```{r, echo=-c(1:13), fig.width=6, fig.height=6.5, fig.align='center'}
+```{r SD-line, echo=-c(1:13), fig.width=6, fig.height=6.5, fig.align='center'}
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80),
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -351,6 +361,7 @@ abline(a = meany - sd(y)/sd(x)*meanx,
        b = sd(y)/sd(x), col = "blue", lwd = 4)
 ```
 
+
 * Note that it does not matter which version of standard deviation was
 used (SD or sd). Why?
 
@@ -358,9 +369,7 @@ used (SD or sd). Why?
   averages, would it be your best guess (prediction) of the
   son's height the corresponding point on the SD line?
 
-```{r, echo=FALSE, fig.width=6, fig.height=6.5, fig.align='center'}
-## Points in relation to SD-line
-
+```{r Points-and-SD-line, echo=FALSE, fig.width=6, fig.height=6.5, fig.align='center'}
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -396,6 +405,8 @@ with(subset(father.son, round(fheight,0) == fround),
 
 ```
 
+<br />
+
 ### The graph of averages
 
 * If you partition your x axis let's say at every inch, the graph of
@@ -405,7 +416,7 @@ with(subset(father.son, round(fheight,0) == fround),
   a different strip width will give a different result, as it happens
   with histograms)
 
-```{r, echo=-c(1:5), fig.width=6, fig.height=6.5, fig.align='center'}
+```{r GoA, echo=-c(1:9), fig.width=6, fig.height=6.5, fig.align='center'}
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -422,6 +433,7 @@ abline(h=meany, col="green")
 ## Graph of averages.
 sgav <- with(father.son, tapply(sheight, round(fheight,0), mean))
 sgavnum <- with(father.son, tapply(sheight, round(fheight,0), length))
+
 points(as.numeric(names(sgav)), sgav, col="red", pch=16)
 text(as.numeric(names(sgav)), sgav, sgavnum, pos=3)
 ```
@@ -432,7 +444,7 @@ text(as.numeric(names(sgav)), sgav, sgavnum, pos=3)
 * T or F: If we add to the GoA plot the SD line, would it more or less
   follow the GoA?
 
-```{r, echo=c(10:11), fig.width=6, fig.height=6.5, fig.align='center'}
+```{r SD-GoA, echo=FALSE, fig.width=6, fig.height=6.5, fig.align='center'}
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -455,6 +467,8 @@ sgav <- with(father.son, tapply(sheight, round(fheight,0), mean))
 points(as.numeric(names(sgav)), sgav, col="red", pch=16)
 ```
 
+<br />
+
 ### The Regression line and the Regression function
 
 * The *regression line* is a *smoothed version* of the *graph of averages*.
@@ -462,7 +476,7 @@ points(as.numeric(names(sgav)), sgav, col="red", pch=16)
   a scatterplot that is a *football-shaped* cloud of points),
   that straight line *is* the regression line.
 
-```{r, echo=FALSE, fig.width=6, fig.height=6.5, fig.align='center'}
+```{r Regression-line, echo=14:15, fig.width=6, fig.height=6.5, fig.align='center'}
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -551,7 +565,7 @@ $$
 
 While you think we will put everything in one plot:
 
-```{r, echo=17:18, fig.width=6, fig.height=6.5, fig.align='center'}
+```{r Everything, echo=FALSE, fig.width=6, fig.height=6.5, fig.align='center'}
 plot(x, y,
      xlim = c(58, 80), ylim = c(58, 80), col="lightgrey",
      xaxt = "n", yaxt = "n", xaxs = "i", yaxs = "i",
@@ -599,3 +613,41 @@ with(subset(father.son, round(fheight,0) == fround),
   
 * Answer:
     - It is the SD line.
+
+<hr />
+
+### Appendix
+
+#### Complete code to produce the SD line plot
+
+```{r SD-line, eval=FALSE}
+```
+
+#### Complete code to produce points in relation to the SD line plot
+
+```{r Points-and-SD-line, eval=FALSE}
+```
+
+#### Complete code to produce the Graph of Averages plot
+
+```{r GoA, eval=FALSE}
+```
+
+#### Complete code to produce the Graph of Averages + SD line plot
+
+```{r SD-GoA, eval=FALSE}
+```
+
+#### Complete code to produce the Regression line plot
+
+```{r Regression-line, eval=FALSE}
+```
+
+#### Complete code to produce the plot with everything
+
+```{r Everything, eval=FALSE}
+```
+
+### Previous
+
+<a href="https://rbertolusso.github.io/posts/LR01-correlation">LR01: Correlation</a>
