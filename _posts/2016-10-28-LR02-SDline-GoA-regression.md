@@ -11,15 +11,15 @@ date: "2016-10-28"
 
 This posts continues the discussion of correlation started on <a href="https://rbertolusso.github.io/posts/LR01-correlation">LR01: Correlation</a>.
 We will try to answer the following questions:
-* Should correlation be used for *any* pair of data?
-* Does association mean causation?
-* What are ecological correlations?
-* What happens with the scatter diagram when we change the standard deviations
+Should correlation be used for *any* pair of data?
+Does association mean causation?
+What are ecological correlations?
+What happens with the scatter diagram when we change the standard deviations
   of x and y?
-* What is the SD line?
-* What is the Graph of averages?
-* What is the Regression line.
-* What is the Regression function?
+What is the SD line?
+What is the Graph of averages?
+What is the Regression line.
+What is the Regression function?
 
 <hr />
 
@@ -157,7 +157,7 @@ plot(byg$math, byg$verbal, col = row.names(byg), pch = 19, cex = 2,
      xlim = c(400, 800), ylim = c(400, 800), main = paste0("r2= ", rg))
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/eco-cor-base-1.png" title="plot of chunk eco-cor-base" alt="plot of chunk eco-cor-base" style="display: block; margin: auto;" />
 
 The same, using `magrittr` pipes, `dplyr` and `intubate` (See
 <a href="https://rbertolusso.github.io/posts/intubate-and-stat-functions-in-pipelines">intubate <||> R stat functions in data science pipelines</a> for an introduction
@@ -190,7 +190,7 @@ byg %>%
        xlim = c(400, 800), ylim = c(400, 800), pch = 19, cex = 2)
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/eco-cor-intubate-1.png" title="plot of chunk eco-cor-intubate" alt="plot of chunk eco-cor-intubate" style="display: block; margin: auto;" />
 
 
 * The left panel contains the raw data, the right panel aggregate data
@@ -213,7 +213,7 @@ byg %>%
   ntbt(points, math, verbal, col = group, pch = 19, cex = 2)
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/eco-cor-both-1.png" title="plot of chunk eco-cor-both" alt="plot of chunk eco-cor-both" style="display: block; margin: auto;" />
 
 * Ecological correlations: based on rates or averages (used
  in political science and sociology). They tend to *overstate*

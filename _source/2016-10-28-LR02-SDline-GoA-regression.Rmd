@@ -15,15 +15,15 @@ knitr::opts_chunk$set(echo = TRUE, error = TRUE,
 
 This posts continues the discussion of correlation started on <a href="https://rbertolusso.github.io/posts/LR01-correlation">LR01: Correlation</a>.
 We will try to answer the following questions:
-* Should correlation be used for *any* pair of data?
-* Does association mean causation?
-* What are ecological correlations?
-* What happens with the scatter diagram when we change the standard deviations
+Should correlation be used for *any* pair of data?
+Does association mean causation?
+What are ecological correlations?
+What happens with the scatter diagram when we change the standard deviations
   of x and y?
-* What is the SD line?
-* What is the Graph of averages?
-* What is the Regression line.
-* What is the Regression function?
+What is the SD line?
+What is the Graph of averages?
+What is the Regression line.
+What is the Regression function?
 
 <hr />
 
@@ -110,7 +110,7 @@ sd(y)
   or of ecological fallacy, of which you can read on
   <http://www.stat.berkeley.edu/~census/ecofall.txt>).
 
-```{r, fig.width=8, fig.height=4.5, fig.align='center'}
+```{r eco-cor-base, fig.width=8, fig.height=4.5, fig.align='center'}
 eco <- read.csv(file = "../data/LR/eco_corre.csv", stringsAsFactors = FALSE)
 
 par(mfrow = c(1,2))
@@ -132,7 +132,7 @@ The same, using `magrittr` pipes, `dplyr` and `intubate` (See
 <a href="https://rbertolusso.github.io/posts/intubate-and-stat-functions-in-pipelines">intubate <||> R stat functions in data science pipelines</a> for an introduction
 to `intubate`):
 
-```{r, message=FALSE, fig.width=8, fig.height=4.5, fig.align='center'}
+```{r eco-cor-intubate, message=FALSE, fig.width=8, fig.height=4.5, fig.align='center'}
 library(magrittr)
 library(dplyr)
 library(intubate)
@@ -169,7 +169,7 @@ byg %>%
  
 * Superimposing both scatterplots:
 
-```{r, fig.width=5, fig.height=5.5, fig.align='center'}
+```{r eco-cor-both, fig.width=5, fig.height=5.5, fig.align='center'}
 eco %>% 
   ntbt(plot, math, verbal, col = group,
        main = paste0("r1= ", r, "; r2= ", rg),
