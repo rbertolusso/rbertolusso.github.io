@@ -4,7 +4,7 @@ title: "Workarounds to include R stat functions in data science pipelines"
 author: "Roberto Bertolusso"
 categories: [intubate]
 tags: [intubate, magrittr, data science, R, r-project, statistics]
-date: "2016-10-27"
+date: "2016-10-29"
 ---
 
 This post explores *some* of the possible workarounds that can be employed
@@ -93,7 +93,7 @@ iris %>%
          auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-27-stat-functions-in-pipelines-without-intubate/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-29-stat-functions-in-pipelines-without-intubate/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" style="display: block; margin: auto;" />
 
 #### Example 3: 
 Using `tmd` (a *different* function in the *same* package)
@@ -121,7 +121,7 @@ iris %>%
       auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-27-stat-functions-in-pipelines-without-intubate/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-29-stat-functions-in-pipelines-without-intubate/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
 
 
 #### Example 4:
@@ -605,7 +605,7 @@ iris %>%
        auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-27-stat-functions-in-pipelines-without-intubate/unnamed-chunk-31-1.png" title="plot of chunk unnamed-chunk-31" alt="plot of chunk unnamed-chunk-31" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-29-stat-functions-in-pipelines-without-intubate/unnamed-chunk-31-1.png" title="plot of chunk unnamed-chunk-31" alt="plot of chunk unnamed-chunk-31" style="display: block; margin: auto;" />
 
 or
 
@@ -617,7 +617,7 @@ iris %>%
               auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-27-stat-functions-in-pipelines-without-intubate/unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-29-stat-functions-in-pipelines-without-intubate/unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" style="display: block; margin: auto;" />
 
 #### For Example 3:
 No need to specify `object`.
@@ -629,7 +629,7 @@ iris %>%
        auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-27-stat-functions-in-pipelines-without-intubate/unnamed-chunk-33-1.png" title="plot of chunk unnamed-chunk-33" alt="plot of chunk unnamed-chunk-33" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-29-stat-functions-in-pipelines-without-intubate/unnamed-chunk-33-1.png" title="plot of chunk unnamed-chunk-33" alt="plot of chunk unnamed-chunk-33" style="display: block; margin: auto;" />
 
 or
 
@@ -641,7 +641,7 @@ iris %>%
            auto.key = list(x = .6, y = .7, corner = c(0, 0)))
 ```
 
-<img src="/figure/source/2016-10-27-stat-functions-in-pipelines-without-intubate/unnamed-chunk-34-1.png" title="plot of chunk unnamed-chunk-34" alt="plot of chunk unnamed-chunk-34" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-10-29-stat-functions-in-pipelines-without-intubate/unnamed-chunk-34-1.png" title="plot of chunk unnamed-chunk-34" alt="plot of chunk unnamed-chunk-34" style="display: block; margin: auto;" />
 
 #### For Example 4:
 No need to specify `model`.
