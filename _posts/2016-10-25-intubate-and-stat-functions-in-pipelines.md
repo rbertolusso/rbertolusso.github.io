@@ -516,3 +516,7 @@ Of course, it will be greatly appreciated,
 if you have some coding skills and can follow the code of the interface,
 if you could provide the proposed *solution*, that *shouldn't break anything else*,
 together with the feature request.
+
+### Next
+
+<a href="https://rbertolusso.github.io/posts/stat-functions-in-pipelines-without-intubate">Workarounds to include R stat functions in data science pipelines</a>

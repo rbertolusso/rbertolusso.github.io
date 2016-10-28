@@ -448,3 +448,7 @@ success of `intubate`).
 After all, the complication should be in
 the analysis you are performing,
 and not in how you are performing it.
+
+### Previous
+
+<a href="https://rbertolusso.github.io/posts/intubate-and-stat-functions-in-pipelines">intubate <||> R stat functions in data science pipelines</a>
