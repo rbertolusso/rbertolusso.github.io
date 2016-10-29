@@ -152,7 +152,7 @@ eco %>%
   group_by(group) %>%
   summarise(math = mean(math),
             verbal = mean(verbal)) -> byg
-rg <- byg %>% ntbt(cor, math, verbal) %>% round(2)
+byg %>% ntbt(cor, math, verbal) %>% round(2) -> rg
 byg %>% 
   ntbt(plot, math, verbal, col = group, main = paste0("r2= ", rg),
        xlim = c(400, 800), ylim = c(400, 800), pch = 19, cex = 2)
@@ -184,10 +184,10 @@ byg %>%
 
 * Correlations based on **rates** or **averages** can be **misleading**.
 
+<hr />
+
 * This ends our discussion about Ecological correlations. We will continue
 with "normal" correlations from now on.
-
-<hr />
 
 ```{r gen-cor, echo=FALSE}
 ## Generating correlated Normal data
@@ -231,7 +231,7 @@ diffr(rho = 0.70, n = 50, SDx = 1, SDy = 1.3)
   one on the left had $\sigma_X = 1.1$ and $\sigma_Y = 0.3$, while the one on
   the right had $\sigma_X = 1$ and $\sigma_Y = 1.3$.
   However, the left one looks more tightly clustered than the other. It is due
-  to the SDs, not $r$.
+  to the SDs, not $r$ (code in Appendix).
   
 * Calculating $r$ involves converting the variables to *standard units*
   where deviations from average are divided by the standard deviation.
@@ -241,12 +241,6 @@ diffr(rho = 0.70, n = 50, SDx = 1, SDy = 1.3)
   
 * By the way, how do you feel, from now on, about guessing values of $r$ by
   looking at the scatterplot?
-
-* Below is the code that generated the figures above:
-```{r gen-cor, eval=FALSE}
-```
-```{r plot-cor, eval=FALSE}
-```
 
 <br />
 
@@ -617,6 +611,14 @@ with(subset(father.son, round(fheight,0) == fround),
 <hr />
 
 ### Appendix
+
+#### Complete code for ecological correlations
+
+```{r gen-cor, eval=FALSE}
+```
+```{r plot-cor, eval=FALSE}
+```
+
 
 #### Complete code to produce the SD line plot
 

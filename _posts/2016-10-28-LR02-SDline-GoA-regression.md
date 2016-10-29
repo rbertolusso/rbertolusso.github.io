@@ -184,7 +184,7 @@ eco %>%
   group_by(group) %>%
   summarise(math = mean(math),
             verbal = mean(verbal)) -> byg
-rg <- byg %>% ntbt(cor, math, verbal) %>% round(2)
+byg %>% ntbt(cor, math, verbal) %>% round(2) -> rg
 byg %>% 
   ntbt(plot, math, verbal, col = group, main = paste0("r2= ", rg),
        xlim = c(400, 800), ylim = c(400, 800), pch = 19, cex = 2)
@@ -221,10 +221,10 @@ byg %>%
 
 * Correlations based on **rates** or **averages** can be **misleading**.
 
+<hr />
+
 * This ends our discussion about Ecological correlations. We will continue
 with "normal" correlations from now on.
-
-<hr />
 
 
 
@@ -245,7 +245,7 @@ with "normal" correlations from now on.
   one on the left had $\sigma_X = 1.1$ and $\sigma_Y = 0.3$, while the one on
   the right had $\sigma_X = 1$ and $\sigma_Y = 1.3$.
   However, the left one looks more tightly clustered than the other. It is due
-  to the SDs, not $r$.
+  to the SDs, not $r$ (code in Appendix).
   
 * Calculating $r$ involves converting the variables to *standard units*
   where deviations from average are divided by the standard deviation.
@@ -255,35 +255,6 @@ with "normal" correlations from now on.
   
 * By the way, how do you feel, from now on, about guessing values of $r$ by
   looking at the scatterplot?
-
-* Below is the code that generated the figures above:
-
-```r
-## Generating correlated Normal data
-diffr <- function(n, rho, SDx = 1, SDy = 1) {
-  meanx <- 3; meany <- 3
-  
-  x1 <- rnorm(n = n)
-  x2 <- rnorm(n = n)
-  x3 <- rho*x1 + sqrt(1-rho^2)*x2
-  
-  x <- meanx + SDx*x1
-  y <- meany + SDy*x3
-  
-  r <- round(cor(x, y), 3)
-  
-  plot(x, y, xlim = c(0,6), ylim = c(0,6),
-       xaxs = "i", yaxs = "i")
-}
-```
-
-```r
-set.seed(1)
-par(mai = c(.2, .2, .2, .2), mgp = c(1.5, 0.2, 0),
-    tck = -.01, mfrow = c(1,2))
-diffr(rho = 0.70, n = 50, SDx = 1.1, SDy = .3)
-diffr(rho = 0.70, n = 50, SDx = 1, SDy = 1.3)
-```
 
 <br />
 
@@ -525,6 +496,37 @@ While you think we will put everything in one plot:
 <hr />
 
 ### Appendix
+
+#### Complete code for ecological correlations
+
+
+```r
+## Generating correlated Normal data
+diffr <- function(n, rho, SDx = 1, SDy = 1) {
+  meanx <- 3; meany <- 3
+  
+  x1 <- rnorm(n = n)
+  x2 <- rnorm(n = n)
+  x3 <- rho*x1 + sqrt(1-rho^2)*x2
+  
+  x <- meanx + SDx*x1
+  y <- meany + SDy*x3
+  
+  r <- round(cor(x, y), 3)
+  
+  plot(x, y, xlim = c(0,6), ylim = c(0,6),
+       xaxs = "i", yaxs = "i")
+}
+```
+
+```r
+set.seed(1)
+par(mai = c(.2, .2, .2, .2), mgp = c(1.5, 0.2, 0),
+    tck = -.01, mfrow = c(1,2))
+diffr(rho = 0.70, n = 50, SDx = 1.1, SDy = .3)
+diffr(rho = 0.70, n = 50, SDx = 1, SDy = 1.3)
+```
+
 
 #### Complete code to produce the SD line plot
 
