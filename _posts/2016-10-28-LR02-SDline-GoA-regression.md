@@ -137,6 +137,9 @@ sd(y)
   or <https://en.wikipedia.org/wiki/Simpson%27s_paradox>,
   or of ecological fallacy, of which you can read on
   <http://www.stat.berkeley.edu/~census/ecofall.txt>).
+  
+  Link to data:
+  <https://rbertolusso.github.io/data/LR/eco_corre.csv>
 
 
 ```r
@@ -389,10 +392,10 @@ obtaining the same result.
 
 ### The graph of averages
 
-* If you partition your x axis let's say at every inch, the graph of
-  averages is the collection of points where the x-coordinate is the
-  center of the vertical strip, and the y-coordinate the *mean* of all
-  the y-values contained in that strip. (Of course your selection of
+* If you partition your $x$ axis let's say at every inch, the graph of
+  averages is the collection of points where the $x$-coordinate is the
+  center of the vertical strip, and the $y$-coordinate the *mean* of all
+  the $y$-values contained in that strip. (Of course your selection of
   a different strip width will give a different result, as it happens
   with histograms)
 
@@ -429,15 +432,15 @@ text(as.numeric(names(sgav)), sgav, sgavnum, pos = 3)
 
 * In general, we could say that the regression
   *function* (meaning *not limited to a straight line*)
-  estimates the **average** value for y corresponding to each value of x.
+  estimates the **average** value for $y$ corresponding to each value of $x$.
   
 * More formally, and implying that we are making probability assumptions
-  on y (that we will see later when turning to a more boring - I mean
+  on $Y$ (that we will see in future notes when turning to a more boring - I mean
   rigorous - stage), the regression function is the conditional
-  expectation of Y given X=x, or $\text{E}[Y|X=x]$.
+  expectation of $Y$ given $X=x$, or $\text{E}[Y|X=x]$.
 
 * Repeter avec moi: The regression function is the conditional expectation
-  of Y given X=x.
+  of $Y$ given $X=x$.
   
 * Informally (I think, but I may be wrong...) we could say that the graph
   of averages is a "discrete" version (as it depends on the width
