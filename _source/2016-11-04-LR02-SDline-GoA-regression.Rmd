@@ -4,7 +4,7 @@ title: "LR02: SD line, GoA, Regression"
 author: "Roberto Bertolusso"
 categories: [Linear Regression]
 tags: [intubate, magrittr, data science, statistics]
-date: "2016-10-28"
+date: "2016-11-04"
 ---
 
 ```{r setup, include=FALSE}

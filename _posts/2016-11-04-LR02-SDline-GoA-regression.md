@@ -4,7 +4,7 @@ title: "LR02: SD line, GoA, Regression"
 author: "Roberto Bertolusso"
 categories: [Linear Regression]
 tags: [intubate, magrittr, data science, statistics]
-date: "2016-10-28"
+date: "2016-11-04"
 ---
 
 
@@ -160,7 +160,7 @@ plot(byg$math, byg$verbal, col = row.names(byg), pch = 19, cex = 2,
      xlim = c(400, 800), ylim = c(400, 800), main = paste0("r2= ", rg))
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/eco-cor-base-1.png" title="plot of chunk eco-cor-base" alt="plot of chunk eco-cor-base" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/eco-cor-base-1.png" title="plot of chunk eco-cor-base" alt="plot of chunk eco-cor-base" style="display: block; margin: auto;" />
 
 The same, using `magrittr` pipes, `dplyr` and `intubate` (See
 <a href="https://rbertolusso.github.io/posts/intubate-and-stat-functions-in-pipelines">intubate <||> R stat functions in data science pipelines</a> for an introduction
@@ -193,7 +193,7 @@ byg %>%
        xlim = c(400, 800), ylim = c(400, 800), pch = 19, cex = 2)
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/eco-cor-intubate-1.png" title="plot of chunk eco-cor-intubate" alt="plot of chunk eco-cor-intubate" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/eco-cor-intubate-1.png" title="plot of chunk eco-cor-intubate" alt="plot of chunk eco-cor-intubate" style="display: block; margin: auto;" />
 
 
 * The left panel contains the raw data, the right panel aggregate data
@@ -216,7 +216,7 @@ byg %>%
   ntbt(points, math, verbal, col = group, pch = 19, cex = 2)
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/eco-cor-both-1.png" title="plot of chunk eco-cor-both" alt="plot of chunk eco-cor-both" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/eco-cor-both-1.png" title="plot of chunk eco-cor-both" alt="plot of chunk eco-cor-both" style="display: block; margin: auto;" />
 
 * Ecological correlations: based on rates or averages (used
  in political science and sociology). They tend to *overstate*
@@ -237,7 +237,7 @@ with "normal" correlations from now on.
   What would be your answer?
 
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/plot-cor-1.png" title="plot of chunk plot-cor" alt="plot of chunk plot-cor" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/plot-cor-1.png" title="plot of chunk plot-cor" alt="plot of chunk plot-cor" style="display: block; margin: auto;" />
 
 <br />
 
@@ -377,7 +377,7 @@ abline(a = meany - sd(y)/sd(x)*meanx,
        b = sd(y)/sd(x), col = "blue", lwd = 4)
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/SD-line-1.png" title="plot of chunk SD-line" alt="plot of chunk SD-line" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/SD-line-1.png" title="plot of chunk SD-line" alt="plot of chunk SD-line" style="display: block; margin: auto;" />
 
 * Note that we have plotted the SD line twice, using $\text{SD}$ and $\text{sd}$,
 obtaining the same result.
@@ -386,7 +386,7 @@ obtaining the same result.
   averages, would it be your best guess (prediction) of the
   son's height the corresponding point on the SD line?
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/Points-and-SD-line-1.png" title="plot of chunk Points-and-SD-line" alt="plot of chunk Points-and-SD-line" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/Points-and-SD-line-1.png" title="plot of chunk Points-and-SD-line" alt="plot of chunk Points-and-SD-line" style="display: block; margin: auto;" />
 
 <br />
 
@@ -409,7 +409,7 @@ points(as.numeric(names(sgav)), sgav, col = "red", pch = 16)
 text(as.numeric(names(sgav)), sgav, sgavnum, pos = 3)
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/GoA-1.png" title="plot of chunk GoA" alt="plot of chunk GoA" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/GoA-1.png" title="plot of chunk GoA" alt="plot of chunk GoA" style="display: block; margin: auto;" />
 
 * The GoA is close to a straight line in the middle, but not at the ends.
   Why do you think that happens?
@@ -417,7 +417,7 @@ text(as.numeric(names(sgav)), sgav, sgavnum, pos = 3)
 * T or F: If we add to the GoA plot the SD line, would it more or less
   follow the GoA?
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/SD-GoA-1.png" title="plot of chunk SD-GoA" alt="plot of chunk SD-GoA" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/SD-GoA-1.png" title="plot of chunk SD-GoA" alt="plot of chunk SD-GoA" style="display: block; margin: auto;" />
 
 <br />
 
@@ -428,7 +428,7 @@ text(as.numeric(names(sgav)), sgav, sgavnum, pos = 3)
   a scatterplot that is a *football-shaped* cloud of points),
   that straight line *is* the regression line.
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/Regression-line-1.png" title="plot of chunk Regression-line" alt="plot of chunk Regression-line" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/Regression-line-1.png" title="plot of chunk Regression-line" alt="plot of chunk Regression-line" style="display: block; margin: auto;" />
 
 * In general, we could say that the regression
   *function* (meaning *not limited to a straight line*)
@@ -494,7 +494,7 @@ abline(a = meany - r*sd(y)/sd(x)*meanx, b = r*sd(y)/sd(x),
        lwd = 4, col = "red")
 ```
 
-<img src="/figure/source/2016-10-28-LR02-SDline-GoA-regression/Everything-1.png" title="plot of chunk Everything" alt="plot of chunk Everything" style="display: block; margin: auto;" />
+<img src="/figure/source/2016-11-04-LR02-SDline-GoA-regression/Everything-1.png" title="plot of chunk Everything" alt="plot of chunk Everything" style="display: block; margin: auto;" />
 
 * The regression line is an *attenuated* version of the SD line. In the SD line,
  when you move 1 SDx to the right, you go 1 SDx above (or below for negative $r$).
