@@ -36,6 +36,10 @@ What is the Regression function?
 
 <hr />
 
+### Previous
+
+<a href="https://rbertolusso.github.io/posts/LR01-correlation">LR01: Correlation</a>
+
 ### What we know so far
 
 * *Correlation coefficient*: measure of **linear** association,
@@ -633,7 +637,7 @@ with(subset(father.son, round(fheight, 0) == fround),
 
 ### Appendix
 
-#### Complete code for ecological correlations
+#### Code for ecological correlations
 
 ```{r gen-cor, eval=FALSE}
 ```
@@ -641,39 +645,39 @@ with(subset(father.son, round(fheight, 0) == fround),
 ```
 
 
-#### Complete code to produce the SD line plot
+#### Code to produce the SD line plot
 
 ```{r SD-line, eval=FALSE}
 ```
 
-#### Complete code to produce points in relation to the SD line plot
+#### Code to produce points in relation to the SD line plot
 
 ```{r Points-and-SD-line, eval=FALSE}
 ```
 
-#### Complete code to produce the Graph of Averages plot
+#### Code to produce the Graph of Averages plot
 
 ```{r GoA, eval=FALSE}
 ```
 
-#### Complete code to produce the Graph of Averages + SD line plot
+#### Code to produce the Graph of Averages + SD line plot
 
 ```{r SD-GoA, eval=FALSE}
 ```
 
-#### Complete code to produce the Regression line plot
+#### Code to produce the Regression line plot
 
 ```{r Regression-line, eval=FALSE}
 ```
 
-#### Complete code to produce the plot with everything
+#### Code to produce the plot with everything
 
 ```{r Everything, eval=FALSE}
 ```
 
-### Previous
+### Next
 
-<a href="https://rbertolusso.github.io/posts/LR01-correlation">LR01: Correlation</a>
+<a href="https://rbertolusso.github.io/posts/LR03-residuals-RMSE">LR03: Residuals and RMSE</a>
 
 ### Related
 

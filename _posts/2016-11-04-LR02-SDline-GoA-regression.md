@@ -32,6 +32,10 @@ What is the Regression function?
 
 <hr />
 
+### Previous
+
+<a href="https://rbertolusso.github.io/posts/LR01-correlation">LR01: Correlation</a>
+
 ### What we know so far
 
 * *Correlation coefficient*: measure of **linear** association,
@@ -511,7 +515,7 @@ abline(a = meany - r*sd(y)/sd(x)*meanx, b = r*sd(y)/sd(x),
 
 ### Appendix
 
-#### Complete code for ecological correlations
+#### Code for ecological correlations
 
 
 ```r
@@ -542,7 +546,7 @@ diffr(rho = 0.70, n = 50, SDx = 1, SDy = 1.3)
 ```
 
 
-#### Complete code to produce the SD line plot
+#### Code to produce the SD line plot
 
 
 ```r
@@ -572,7 +576,7 @@ abline(a = meany - sd(y)/sd(x)*meanx,
        b = sd(y)/sd(x), col = "blue", lwd = 4)
 ```
 
-#### Complete code to produce points in relation to the SD line plot
+#### Code to produce points in relation to the SD line plot
 
 
 ```r
@@ -612,7 +616,7 @@ with(subset(father.son, round(fheight,0) == fround),
                          "darkgreen", "blue")))
 ```
 
-#### Complete code to produce the Graph of Averages plot
+#### Code to produce the Graph of Averages plot
 
 
 ```r
@@ -637,7 +641,7 @@ points(as.numeric(names(sgav)), sgav, col = "red", pch = 16)
 text(as.numeric(names(sgav)), sgav, sgavnum, pos = 3)
 ```
 
-#### Complete code to produce the Graph of Averages + SD line plot
+#### Code to produce the Graph of Averages + SD line plot
 
 
 ```r
@@ -663,7 +667,7 @@ sgav <- with(father.son, tapply(sheight, round(fheight, 0), mean))
 points(as.numeric(names(sgav)), sgav, col = "red", pch = 16)
 ```
 
-#### Complete code to produce the Regression line plot
+#### Code to produce the Regression line plot
 
 
 ```r
@@ -703,7 +707,7 @@ with(subset(father.son, round(fheight, 0) == fround),
                          "darkgreen", "blue")))
 ```
 
-#### Complete code to produce the plot with everything
+#### Code to produce the plot with everything
 
 
 ```r
@@ -747,9 +751,9 @@ with(subset(father.son, round(fheight, 0) == fround),
                          "darkgreen", "blue")))
 ```
 
-### Previous
+### Next
 
-<a href="https://rbertolusso.github.io/posts/LR01-correlation">LR01: Correlation</a>
+<a href="https://rbertolusso.github.io/posts/LR03-residuals-RMSE">LR03: Residuals and RMSE</a>
 
 ### Related
 
